@@ -1,0 +1,35 @@
+# Tuning Budget declared BEFORE any tuning runs (Rule 10 & Plan Section 3a)
+# Selection rule: Highest validation macro-F1 on seed 0 only. Test split is NEVER accessed.
+
+selection_rule:
+  metric: "val_macro_f1"
+  mode: "max"
+  tuning_seed: 0
+
+random_forest:
+  trials:
+    - { trial_id: "rf_01", n_estimators: 100, max_depth: null, class_weight: "balanced" }
+    - { trial_id: "rf_02", n_estimators: 100, max_depth: 20,   class_weight: "balanced" }
+    - { trial_id: "rf_03", n_estimators: 100, max_depth: 10,   class_weight: "balanced" }
+    - { trial_id: "rf_04", n_estimators: 300, max_depth: null, class_weight: "balanced" }
+    - { trial_id: "rf_05", n_estimators: 300, max_depth: 20,   class_weight: "balanced" }
+    - { trial_id: "rf_06", n_estimators: 300, max_depth: 10,   class_weight: "balanced" }
+
+mlp:
+  trials:
+    - { trial_id: "mlp_01", hidden_sizes: [128, 64],  dropout: 0.2, lr: 0.001, class_weight: false }
+    - { trial_id: "mlp_02", hidden_sizes: [128, 64],  dropout: 0.4, lr: 0.001, class_weight: false }
+    - { trial_id: "mlp_03", hidden_sizes: [256, 128], dropout: 0.2, lr: 0.001, class_weight: false }
+    - { trial_id: "mlp_04", hidden_sizes: [256, 128], dropout: 0.4, lr: 0.001, class_weight: false }
+    - { trial_id: "mlp_05", hidden_sizes: [128, 64],  dropout: 0.2, lr: 0.001, class_weight: true }
+    - { trial_id: "mlp_06", hidden_sizes: [256, 128], dropout: 0.2, lr: 0.001, class_weight: true }
+
+cnn:
+  trials:
+    - { trial_id: "cnn_01", filters: [32, 64, 64],   kernel_size: 5, dropout: 0.3, lr: 0.001 }
+    - { trial_id: "cnn_02", filters: [32, 64, 64],   kernel_size: 7, dropout: 0.3, lr: 0.001 }
+    - { trial_id: "cnn_03", filters: [32, 64, 64],   kernel_size: 5, dropout: 0.5, lr: 0.001 }
+    - { trial_id: "cnn_04", filters: [64, 128, 128], kernel_size: 5, dropout: 0.3, lr: 0.001 }
+    - { trial_id: "cnn_05", filters: [64, 128, 128], kernel_size: 7, dropout: 0.3, lr: 0.001 }
+    - { trial_id: "cnn_06", filters: [64, 128, 128], kernel_size: 5, dropout: 0.5, lr: 0.001 }
+

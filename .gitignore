@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Raw dataset (explicitly excluded as per project rules & CW1 plan - READ ONLY, do not redistribute)
+MotionSense_dataset/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Cache directories
+.pytest_cache/
+outputs/cache/
+
+# System / IDE metadata
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+

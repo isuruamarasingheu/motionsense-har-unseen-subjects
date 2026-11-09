@@ -1,0 +1,34 @@
+# Data processing and windowing configuration
+dataset:
+  raw_dir: "MotionSense_dataset/A_DeviceMotion_data/A_DeviceMotion_data"
+  subjects_info: "MotionSense_dataset/data_subjects_info.csv"
+  cache_dir: "outputs/cache"
+  splits_dir: "outputs/splits"
+  preprocessing_dir: "outputs/preprocessing"
+
+windowing:
+  window_size: 128    # 2.56 seconds at 50 Hz
+  stride: 64          # 50% overlap
+  sample_rate_hz: 50
+
+split:
+  seed: 42
+  n_train_subjects: 16
+  n_val_subjects: 4
+  n_test_subjects: 4
+  stratify_by_gender: true
+  val_composition:
+    male: 2
+    female: 2
+  test_composition:
+    male: 2
+    female: 2
+
+labels:
+  0: "dws" # downstairs
+  1: "ups" # upstairs
+  2: "wlk" # walking
+  3: "jog" # jogging
+  4: "std" # standing
+  5: "sit" # sitting
+

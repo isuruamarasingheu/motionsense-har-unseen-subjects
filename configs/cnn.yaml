@@ -1,0 +1,26 @@
+# Configuration for PyTorch 1D-CNN (Task T3b)
+model:
+  name: "pytorch_cnn_1d"
+  in_channels: 12
+  sequence_length: 128
+  filters: [32, 64, 64]
+  kernel_size: 5
+  dropout: 0.3
+  num_classes: 6
+
+training:
+  batch_size: 64
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  max_epochs: 60
+  patience: 8
+  loss: "cross_entropy"
+  use_class_weights: false
+
+smoke_test:
+  n_train_subjects: 2
+  n_val_subjects: 1
+  epochs: 1
+
+seeds: [0, 1, 2]
+
