@@ -188,7 +188,7 @@ __pycache__/, .ipynb_checkpoints/. Do not write any modelling code yet.
 
 ---
 
-### Phase 1 — T1 Problem definition & data preparation (8 marks)  ☐
+### Phase 1 — T1 Problem definition & data preparation (8 marks)  ☑
 
 #### 1a. Loading + audit (T1a, T1b)
 
@@ -241,10 +241,10 @@ Add assertions/tests:
 ```
 
 **Acceptance checks**
-- [ ] `split.json` exists; no subject overlap (assertion passes)
-- [ ] Window counts printed per split and per class (expect roughly 20k+ windows total)
-- [ ] Scaler fitted only on train
-- [ ] 4 figures saved with labelled axes
+- [x] `split.json` exists; no subject overlap (assertion passes)
+- [x] Window counts printed per split and per class (expect roughly 20k+ windows total)
+- [x] Scaler fitted only on train
+- [x] 4 figures saved with labelled axes
 
 **Supervision checkpoint → send Claude:** audit printout (missing/duplicates/imbalance numbers), `split.json`, window counts table, the 4 figures.
 
