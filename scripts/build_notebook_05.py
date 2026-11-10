@@ -485,7 +485,7 @@ print("=" * 75)
 print("TABLE 2: TEST MACRO-F1 UNDER INCREASING SENSOR NOISE (σ)")
 print("=" * 75)
 ipd.display(pivot_noise)
-print("± = std across 3 model seeds (each averaged over 5 noise draws); sigma=0 matches results_table.csv.")
+print("\\n± = std across 3 model seeds (each averaged over 5 noise draws); sigma=0 matches results_table.csv.")
 
 # Assert that sigma=0 std matches results_table.csv to 1e-4
 df_results = pd.read_csv("outputs/metrics/results_table.csv")
