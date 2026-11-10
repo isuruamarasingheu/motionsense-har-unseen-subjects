@@ -252,7 +252,7 @@ Add assertions/tests:
 
 ---
 
-### Phase 2 — T2 NumPy MLP from first principles (12 marks)  ☐
+### Phase 2 — T2 NumPy MLP from first principles (12 marks)  ☑
 
 **Prompt for Antigravity:**
 ```
@@ -286,10 +286,10 @@ If training does not converge, show it and diagnose (lr too high/low, scaling) �
 ```
 
 **Acceptance checks**
-- [ ] All grad-check relative errors < 1e-6 (8 entries, all 4 parameter arrays)
-- [ ] Loss curve decreases; initial loss ≈ ln(6) ≈ 1.79 (sanity check for 6 classes)
-- [ ] Tiny batch overfits to near-zero loss
-- [ ] Learning rate, stopping rule, epochs completed reported
+- [x] All grad-check relative errors < 1e-6 (8 entries, all 4 parameter arrays)
+- [x] Loss curve decreases; initial loss ≈ ln(6) ≈ 1.79 (sanity check for 6 classes)
+- [x] Tiny batch overfits to near-zero loss
+- [x] Learning rate, stopping rule, epochs completed reported
 
 **Supervision checkpoint → send Claude:** grad-check table, initial/final loss, both figures, val macro-F1.
 
