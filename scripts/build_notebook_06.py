@@ -233,16 +233,9 @@ The inference module `src/predict.py` implements a production-ready, trial-bound
     c10_code = """# 4.1 Valid Sample Demonstration (Test Subject 8, wlk_7, rows 500-999)
 valid_sample = "samples/valid_walking_subject8.csv"
 
-print("--- Running PyTorch 1D-CNN (seed 2) on Valid Sample ---")
-res_cnn = subprocess.run(
-    ["python", "-m", "src.predict", "--model", "cnn", "--input", valid_sample],
-    capture_output=True, text=True
-)
-print(res_cnn.stdout)
-
-print("--- Running PyTorch MLP (seed 0) on Valid Sample ---")
+print("--- Running recommended PyTorch MLP (seed 0) on Valid Sample ---")
 res_mlp = subprocess.run(
-    ["python", "-m", "src.predict", "--model", "mlp", "--input", valid_sample],
+    [sys.executable, "-m", "src.predict", "--model", "mlp", "--input", valid_sample],
     capture_output=True, text=True
 )
 print(res_mlp.stdout)
@@ -254,9 +247,9 @@ print(res_mlp.stdout)
 # Demonstrates sensor orientation sensitivity identified in Phase 4 error analysis
 failure_sample = "samples/failure_walking_subject1.csv"
 
-print("--- Running PyTorch 1D-CNN on Phone-Orientation Inversion Sample ---")
+print("--- Running PyTorch MLP (seed 0) on Tilted-Phone Walking Sample (true activity: walking) ---")
 res_fail = subprocess.run(
-    ["python", "-m", "src.predict", "--model", "cnn", "--input", failure_sample],
+    [sys.executable, "-m", "src.predict", "--model", "mlp", "--input", failure_sample],
     capture_output=True, text=True
 )
 print(res_fail.stdout)
@@ -267,9 +260,9 @@ print(res_fail.stdout)
     c12_code = """# 4.3 Out-of-Scope Warning Demonstration (Magnified Acceleration x20)
 oos_sample = "samples/out_of_scope_scaled.csv"
 
-print("--- Running PyTorch 1D-CNN on Out-of-Scope Scaled Sample ---")
+print("--- Running PyTorch MLP (seed 0) on Out-of-Scope Scaled Sample ---")
 res_oos = subprocess.run(
-    ["python", "-m", "src.predict", "--model", "cnn", "--input", oos_sample],
+    [sys.executable, "-m", "src.predict", "--model", "mlp", "--input", oos_sample],
     capture_output=True, text=True
 )
 print(res_oos.stdout)
@@ -287,11 +280,11 @@ invalid_cases = [
 
 for label, filepath in invalid_cases:
     res = subprocess.run(
-        ["python", "-m", "src.predict", "--model", "cnn", "--input", filepath],
+        [sys.executable, "-m", "src.predict", "--model", "mlp", "--input", filepath],
         capture_output=True, text=True
     )
     print(f"Case: {label}")
-    print(f"  Command: python -m src.predict --model cnn --input {filepath}")
+    print(f"  Command: python -m src.predict --model mlp --input {filepath}")
     print(f"  Exit Code: {res.returncode} (Expected Non-Zero)")
     print(f"  Stderr Output: {res.stderr.strip()}")
     print("-" * 75)
@@ -301,7 +294,7 @@ for label, filepath in invalid_cases:
     # Cell 14: Code - Subprocess Demo: JSON Mode
     c14_code = """# 4.5 Structured JSON Mode Demonstration (--json flag)
 res_json = subprocess.run(
-    ["python", "-m", "src.predict", "--model", "cnn", "--input", valid_sample, "--json"],
+    [sys.executable, "-m", "src.predict", "--model", "mlp", "--input", valid_sample, "--json"],
     capture_output=True, text=True
 )
 parsed_json = json.loads(res_json.stdout)
@@ -317,18 +310,71 @@ for code, prob in parsed_json['mean_class_probabilities'].items():
 """
     cells.append(nbf.v4.new_code_cell(c14_code))
 
-    # Cell 15: Markdown - Limitations & Future Work (Task T5c)
-    c15_md = """## 5. Limitations & Future Directions (Task T5c)
+    # Trace section (T6b): config -> checkpoint -> results row -> figure
+    trace_md = """## 5. Tracing One Result: Config → Checkpoint → Metrics → Figure (Task T6b)
 
-*Instructions for Student:* This section outlines critical limitations, failure boundaries, ethical considerations, and next experimental steps. Complete the analysis under each designated heading below.
+This follows the recommended model (PyTorch MLP, seed 0) from its frozen configuration to its reported test score.
+Every value below is read from saved files; nothing is retrained or re-evaluated.
+"""
+    cells.append(nbf.v4.new_markdown_cell(trace_md))
+
+    trace_code = """import yaml
+
+cfg_path = Path("configs/mlp_final.yaml")
+snap_path = Path("outputs/checkpoints/pytorch_mlp_seed0_config.yaml")
+ckpt_path = Path("outputs/checkpoints/pytorch_mlp_seed0.pt")
+info_path = Path("outputs/checkpoints/run_info_pytorch_mlp_seed0.json")
+
+# Step 1: frozen configuration
+print("STEP 1 - Frozen configuration:", cfg_path)
+print(cfg_path.read_text())
+
+# Step 2: the config copy saved next to the checkpoint must match the frozen config
+cfg = yaml.safe_load(cfg_path.read_text())
+snap = yaml.safe_load(snap_path.read_text())
+print("STEP 2 - Checkpoint:", ckpt_path, f"({ckpt_path.stat().st_size / 1024:.1f} KB)")
+for section in ["model", "training"]:
+    same = cfg.get(section) == snap.get(section)
+    print(f"  '{section}' settings in saved snapshot match frozen config: {same}")
+
+# Step 3: environment recorded at training time
+info = json.loads(info_path.read_text())
+print()
+print("STEP 3 - Run environment:", info_path)
+for key in ["timestamp", "python_version", "torch_version", "cpu_name", "seed"]:
+    if key in info:
+        print(f"  {key}: {info[key]}")
+
+# Step 4: the row in the results table produced by src/evaluate.py (test set used once)
+results = pd.read_csv("outputs/metrics/results_table.csv")
+row = results[(results["model"] == "pytorch_mlp") & (results["seed"] == 0)]
+print()
+print("STEP 4 - Row in outputs/metrics/results_table.csv:")
+print(row.to_string(index=False))
+"""
+    cells.append(nbf.v4.new_code_cell(trace_code))
+
+    trace_fig = """# Step 5: confusion matrix for this checkpoint on the test set
+fig11_path = Path("outputs/figures/fig11_cm_mlp.png")
+print("STEP 5 - Test confusion matrix:", fig11_path)
+ipd.display(ipd.Image(filename=str(fig11_path), width=600))
+"""
+    cells.append(nbf.v4.new_code_cell(trace_fig))
+
+    # Cell 15: Markdown - Limitations & Future Work (Task T5c)
+    c15_md = """## 6. Limitations & Future Directions (Task T5c)
 
 ### Dataset bias
+24 people aged 18–46, one phone model and one way of carrying it, and test results come from only 4 people.
 
 ### Generalisation
+Every model scores 0.04–0.09 lower on test than on validation, and recordings with a tilted phone fail badly (see section 4.2). No model here is ready for real use on this evidence alone.
 
 ### Privacy & misuse
+Motion data can reveal identity (walking style), health and daily routine. Predictions should run on the phone itself, with the user's consent, and raw signals should not be uploaded.
 
 ### Next experiment
+Train on randomly rotated signals and re-test on the tilted recordings, using the same subject split and macro-F1.
 """
     cells.append(nbf.v4.new_markdown_cell(c15_md))
 

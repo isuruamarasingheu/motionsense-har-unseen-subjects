@@ -85,7 +85,7 @@ RF and MLP are effectively tied on test. CNN seed 0 had the best validation scor
 
 ## T6 Reproducibility and demonstration
 
-The README covers setup, the pinned `requirements.txt`, how to download the data (not redistributed), the run order and a smoke test (`pytest -q` plus a one-epoch CNN run, about 35 s). Splits, seeds, final configs, model files and results are included. The demo shows predictions on a valid and an invalid file, follows `cnn_final.yaml` → `pytorch_cnn_1d_seed2.pt` → its row in `results_table.csv` → Fig. 12, explains why I split by person, and shows the tilted-phone failure.
+The README covers setup, the pinned `requirements.txt`, how to download the data (not redistributed), the run order and a smoke test (`pytest -q` plus a one-epoch CNN run, about 35 s). Splits, seeds, final configs, model files and results are included. The demo shows predictions on a valid and an invalid file, follows `mlp_final.yaml` → `pytorch_mlp_seed0.pt` → its row in `results_table.csv` → Fig. 11, explains why I split by person, and shows the tilted-phone failure.
 
 ---
 
