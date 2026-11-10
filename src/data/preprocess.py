@@ -11,12 +11,12 @@ Responsibilities:
 - Provide transform and inverse_transform utilities for val, test, and inference inputs.
 - Verify via assertions that the scaler's fitted mean equals the training feature mean only.
 
-Rule compliance:
-- Rule 5: Any scaler/normaliser is fitted on TRAIN data only, then saved and
+Design constraints:
+- Any scaler/normaliser is fitted on TRAIN data only, then saved and
   reused for val/test/inference.
-- Rule 8: Serialises all preprocessing parameters for complete auditability.
-- Rule 13: Docstrings explain why fitting on training data only is mandatory.
-- Rule 14: Clear, robust, and easily explainable implementation.
+- Serialises all preprocessing parameters for complete auditability.
+- Docstrings explain why fitting on training data only is mandatory.
+- Clear, robust, and easily explainable implementation.
 """
 
 from __future__ import annotations
@@ -283,7 +283,7 @@ def assert_scaler_fitted_on_train_only(
     Assert that scalers were fitted exclusively on training data and not on validation data.
 
     Why:
-        Enforces Rule 5. Tests that:
+        Tests that:
         1. Scaler mean exactly matches training feature mean.
         2. Scaler mean does not equal validation feature mean (ruling out test/val leakage).
         3. If raw scaler is provided, raw channel mean matches training raw window mean only.

@@ -82,7 +82,7 @@ def test_tuning_log_completeness() -> None:
 
 
 def test_no_test_set_access_in_phase3_scripts() -> None:
-    """Rule 7 check: Phase 3 scripts must never load or reference test data arrays."""
+    """Leakage check: Phase 3 scripts must never load or reference test data arrays."""
     phase3_files = [
         Path("src/train_baseline.py"),
         Path("src/train.py"),

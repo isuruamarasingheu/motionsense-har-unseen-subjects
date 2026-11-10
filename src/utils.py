@@ -7,11 +7,11 @@ This module provides common utilities for:
 - Provenance tracking (recording runtime environment, package versions, OS, CPU,
   and timestamps into run_info.json).
 
-Rule compliance:
-- Rule 8: Every run records run_info.json (seed, versions, CPU, timestamp).
-- Rule 9: Set all seeds (python random, numpy, torch) from config.
-- Rule 13: Docstrings and comments explain WHY, not just what.
-- Rule 14: Keep code simple, clean, and easily explainable.
+Design constraints:
+- Every run records run_info.json (seed, versions, CPU, timestamp).
+- Set all seeds (python random, numpy, torch) from config.
+- Docstrings and comments explain WHY, not just what.
+- Keep code simple, clean, and easily explainable.
 """
 
 from __future__ import annotations
@@ -194,7 +194,7 @@ def write_run_info(
     Record runtime environment metadata into a JSON file for reproducibility.
 
     Why:
-        Rule 8 dictates that every training or evaluation run must record
+        Every training or evaluation run must record
         environment metadata (Python, library versions, OS, CPU, timestamp)
         alongside checkpoints to ensure audits and reproduction are verifiable.
 

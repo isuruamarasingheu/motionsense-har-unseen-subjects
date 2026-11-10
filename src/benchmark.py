@@ -628,7 +628,7 @@ def run_benchmarks() -> tuple[dict[str, Any], pd.DataFrame]:
     logger.info("Environment: CPU=%s, OS=%s, Python=%s, PyTorch=%s, scikit-learn=%s, Threads=%d",
                 cpu_name, os_name, python_ver, torch_ver, sklearn_ver, NUM_THREADS)
 
-    # 2. Load validation windows strictly (Rule compliance: never touch test set for timing)
+    # 2. Load validation windows strictly (never touch the test set for timing)
     cache_dir = Path("outputs/cache")
     logger.info("Loading VALIDATION windows from outputs/cache/ ...")
     X_val_raw = np.load(cache_dir / "X_val_raw.npy")

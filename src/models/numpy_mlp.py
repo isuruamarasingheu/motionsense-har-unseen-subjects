@@ -40,11 +40,11 @@ Mathematical Foundations:
 5. Parameter Update (Mini-batch Gradient Descent):
    - theta = theta - lr * dtheta for theta in {W1, b1, W2, b2}
 
-Rule compliance:
-- Rule 1: Built strictly with NumPy (float64) without autograd or torch dependencies.
-- Rule 10: Numerical verification logged to outputs/metrics/numpy_mlp.json.
-- Rule 13: Docstrings explicitly document array dimensions and mathematical calculus derivations.
-- Rule 14: Clear, readable, and explainable structure.
+Design constraints:
+- Built strictly with NumPy (float64) without autograd or torch dependencies.
+- Numerical verification logged to outputs/metrics/numpy_mlp.json.
+- Docstrings explicitly document array dimensions and mathematical calculus derivations.
+- Clear, readable, and explainable structure.
 """
 
 from __future__ import annotations

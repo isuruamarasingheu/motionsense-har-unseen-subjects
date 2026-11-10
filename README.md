@@ -215,8 +215,6 @@ ANN/
 │   ├── invalid_nan.csv                  # Has NaN values
 │   └── out_of_scope_scaled.csv          # Extreme values (triggers warning)
 ├── scripts/                             # Helper scripts
-│   ├── build_notebook_05.py             # Builds and runs notebook 05
-│   ├── build_notebook_06.py             # Builds and runs notebook 06
 │   └── make_samples.py                  # Creates sample CSVs from raw data
 ├── src/                                 # Main code
 │   ├── data/

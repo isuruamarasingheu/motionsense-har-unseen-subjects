@@ -13,13 +13,13 @@ Responsibilities:
 - Output finalised configuration files: `configs/mlp_final.yaml` and `configs/cnn_final.yaml`.
 - Generate final loss curves (fig08_mlp_loss_curves.png, fig09_cnn_loss_curves.png) and layer tables.
 
-Rule compliance:
-- Rule 7: Never touch or evaluate the test split during tuning or model selection.
-- Rule 8: Save checkpoints, final configs, logs, metrics, and run_info.json.
-- Rule 9: All tuning uses seed 0 as declared in tuning_budget.yaml.
-- Rule 10: Retain all runs in tuning_log.csv; never hide unsuccessful trials.
-- Rule 12: Loss curve plots saved with titled axes, units, and dpi 150.
-- Rule 14: Clear, structured, and reproducible tuning orchestration.
+Design constraints:
+- Never touch or evaluate the test split during tuning or model selection.
+- Save checkpoints, final configs, logs, metrics, and run_info.json.
+- All tuning uses seed 0 as declared in tuning_budget.yaml.
+- Retain all runs in tuning_log.csv; never hide unsuccessful trials.
+- Loss curve plots saved with titled axes, units, and dpi 150.
+- Clear, structured, and reproducible tuning orchestration.
 """
 
 from __future__ import annotations
@@ -52,7 +52,7 @@ def run_tuning(budget_path: str = "configs/tuning_budget.yaml") -> dict[str, Any
     Execute the systematic tuning protocol declared in configs/tuning_budget.yaml.
 
     Why:
-        Plan Section 3a/3b & Rule 10: declares tuning budget before any tuning runs,
+        Declares tuning budget before any tuning runs,
         executes trials on validation data only using seed 0, and logs all outcomes.
     """
     logger.info(f"Loading tuning budget from {budget_path}...")

@@ -12,11 +12,11 @@ Architecture:
     * Flatten -> Dropout(p) -> Linear(last_channels -> num_classes) logits (default 6).
 - Weight initialisation: Kaiming (He) normal initialisation for convolutional and linear layers.
 
-Rule compliance:
-- Rule 1: Meaningfully distinct temporal architecture from the static tabular MLP.
-- Rule 8: Filter sizes, kernel sizes, and dropout configured via YAML files.
-- Rule 13: Docstrings explain architectural choices and initialisation schemes.
-- Rule 14: Clear modular PyTorch nn.Module design.
+Design constraints:
+- Meaningfully distinct temporal architecture from the static tabular MLP.
+- Filter sizes, kernel sizes, and dropout configured via YAML files.
+- Docstrings explain architectural choices and initialisation schemes.
+- Clear modular PyTorch nn.Module design.
 """
 
 from __future__ import annotations
@@ -168,7 +168,7 @@ def generate_layer_table_cnn(
     and parameter counts for PyTorchCNN1D.
 
     Why:
-        Plan Section 3b requires a verifiable layer table saved to outputs/metrics/<model>_layers.md,
+        A verifiable layer table is saved to outputs/metrics/<model>_layers.md,
         confirming exact parameter counts and architectural compliance.
     """
     c_in = model.in_channels

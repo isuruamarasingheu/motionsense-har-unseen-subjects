@@ -28,14 +28,14 @@ Responsibilities:
    - Reports demographic metadata and window distributions.
    - Saves `outputs/metrics/subgroup.json` and `outputs/figures/fig18_per_subject_f1.png`.
 
-Rule compliance:
-- Rule 1: Python 3.11, NumPy, pandas, scikit-learn, PyTorch (CPU), matplotlib.
-- Rule 7: Test split never used to select models, seeds, or hyperparameters.
-- Rule 8: Saves structured JSON metrics, logs, and provenance.
-- Rule 10: Pure empirical data; no hard-coded or fabricated metrics.
-- Rule 12: High-resolution PNGs (dpi=150) with titled and labelled axes with units.
-- Rule 13: Detailed docstrings explain experimental designs, hypotheses, and confounders.
-- Rule 14: Clear, modular, and maintainable implementation.
+Design constraints:
+- Python 3.11, NumPy, pandas, scikit-learn, PyTorch (CPU), matplotlib.
+- Test split never used to select models, seeds, or hyperparameters.
+- Saves structured JSON metrics, logs, and provenance.
+- Pure empirical data; no hard-coded or fabricated metrics.
+- High-resolution PNGs (dpi=150) with titled and labelled axes with units.
+- Detailed docstrings explain experimental designs, hypotheses, and confounders.
+- Clear, modular, and maintainable implementation.
 """
 
 from __future__ import annotations
@@ -89,7 +89,7 @@ def run_ablation() -> dict[str, Any]:
     Why:
         Tests design hypothesis: 'Dropout (p=0.3) before the classifier improves
         validation macro-F1 and reduces seed-to-seed variance of the 1D-CNN.'
-        Strictly evaluated on validation split only (Rule 7).
+        Strictly evaluated on validation split only.
     """
     logger.info("=" * 60)
     logger.info("STARTING TASK T4c: ABLATION STUDY (DROPOUT REGULARISATION)")

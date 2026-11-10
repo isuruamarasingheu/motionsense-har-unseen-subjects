@@ -13,12 +13,12 @@ Responsibilities:
 - Verify via strict assertions that train, val, and test subject sets are disjoint
   (intersection is empty), preventing identity leakage.
 
-Rule compliance:
-- Rule 4: Data splitting is BY SUBJECT ONLY. Never split windows randomly.
+Design constraints:
+- Data splitting is BY SUBJECT ONLY. Never split windows randomly.
   A subject's data must appear in exactly one of train / val / test.
-- Rule 5: Splitting happens BEFORE windowing.
-- Rule 9: Seed is loaded from config for exact reproducibility.
-- Rule 13: Docstrings explain why subject-wise splitting is essential.
+- Splitting happens BEFORE windowing.
+- Seed is loaded from config for exact reproducibility.
+- Docstrings explain why subject-wise splitting is essential.
 """
 
 from __future__ import annotations
@@ -142,7 +142,7 @@ def assert_disjoint_splits(split_dict: dict[str, Any], all_subjects: list[int] |
     Assert that train, val, and test splits have zero subject overlap.
 
     Why:
-        Enforces Rule 4 and Rule 5. A subject appearing in multiple splits causes
+        A subject appearing in multiple splits causes
         identity leakage, which invalidates the coursework results.
 
     Args:

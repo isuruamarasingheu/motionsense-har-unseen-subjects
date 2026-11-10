@@ -1,4 +1,4 @@
-# Tuning Budget declared BEFORE any tuning runs (Rule 10 & Plan Section 3a)
+# Tuning Budget declared BEFORE any tuning runs
 # Selection rule: Highest validation macro-F1 on seed 0 only. Test split is NEVER accessed.
 
 selection_rule:

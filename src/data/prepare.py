@@ -5,13 +5,13 @@ Purpose: End-to-end data preparation pipeline execution.
 Responsibilities:
 - Orchestrate loading, subject-wise splitting, trial-bounded windowing,
   hand-crafted feature extraction, and train-only scaling.
-- Ensure strict adherence to the project rules:
-    * Rule 2: Raw data is read-only.
-    * Rule 3: macOS artifacts dropped; unnamed index columns removed.
-    * Rule 4: Data splitting is by subject only; no subject overlap.
-    * Rule 5: Splitting happens BEFORE windowing; scalers fitted on TRAIN only.
-    * Rule 9: Random seed loaded from configs/data.yaml.
-    * Rule 10: Retain truthful logging and deduplicated dataset records.
+- Design constraints:
+    * Raw data is read-only.
+    * macOS artifacts dropped; unnamed index columns removed.
+    * Data splitting is by subject only; no subject overlap.
+    * Splitting happens BEFORE windowing; scalers fitted on TRAIN only.
+    * Random seed loaded from configs/data.yaml.
+    * Retain truthful logging and deduplicated dataset records.
 - Persist all processed artifacts:
     * `outputs/splits/split.json`
     * `outputs/splits/windows_<split>.csv`
@@ -102,7 +102,7 @@ def run_pipeline(
     assert len(dup_check) == 0, "Duplicate recording (subject 1 trial 13) was not removed!"
     logger.info("Confirmed: Duplicate recording (subject 1 trial 13) is dropped.")
 
-    # 3. Subject-wise, gender-balanced split (Rule 4 & 5)
+    # 3. Subject-wise, gender-balanced split
     split_json_path = splits_dir / "split.json"
     logger.info("Creating subject-wise split...")
     split_dict = create_subject_split(
@@ -119,7 +119,7 @@ def run_pipeline(
     assert_disjoint_splits(split_dict, all_subjects=sorted(df["subject"].unique().tolist()))
     logger.info("[ASSERTION 1 PASS] subjects in train ∩ val ∩ test = empty (disjoint sets).")
 
-    # 4. Partition DataFrame by subject BEFORE windowing (Rule 5)
+    # 4. Partition DataFrame by subject BEFORE windowing
     train_subjects = split_dict["train"]
     val_subjects = split_dict["val"]
     test_subjects = split_dict["test"]
@@ -138,7 +138,7 @@ def run_pipeline(
         len(test_subjects),
     )
 
-    # 5. Extract windows inside each (subject, trial) recording (Rule 4)
+    # 5. Extract windows inside each (subject, trial) recording
     win_cfg = cfg.get("windowing", {})
     window_size = win_cfg.get("window_size", 128)
     stride = win_cfg.get("stride", 64)
@@ -169,7 +169,7 @@ def run_pipeline(
     assert X_train_feat.shape[1] == 84, f"Expected 84 features, got {X_train_feat.shape[1]}"
     assert len(feature_names) == 84, f"Expected 84 feature names, got {len(feature_names)}"
 
-    # 7. Fit preprocessing scalers FITTED ON TRAIN ONLY (Rule 5)
+    # 7. Fit preprocessing scalers FITTED ON TRAIN ONLY
     logger.info("Fitting FeatureScaler and RawWindowScaler on TRAIN split only...")
     feat_scaler = FeatureScaler().fit(X_train_feat)
     raw_scaler = RawWindowScaler().fit(X_train_raw)

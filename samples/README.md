@@ -1,6 +1,6 @@
 # MotionSense Sample Recordings (`samples/`)
 
-This directory contains demonstration and testing sensor recordings for the `src.predict` CLI inference engine (Task T5b). In compliance with Project Rule 2, raw data is not committed; all samples are created dynamically from the local dataset via `scripts/make_samples.py`.
+This directory contains demonstration and testing sensor recordings for the `src.predict` CLI inference engine (Task T5b). Raw data is not committed; all samples are created dynamically from the local dataset via `scripts/make_samples.py`.
 
 To rebuild samples from the local dataset at any time, run:
 ```bash

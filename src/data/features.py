@@ -18,9 +18,9 @@ Responsibilities:
   yielding exactly 14 signals x 6 statistics = 84 features per window.
 - Ensure identical feature representation across Random Forest, PyTorch MLP, and NumPy MLP.
 
-Rule compliance:
-- Rule 13: Feature definitions and mathematical derivations documented clearly.
-- Rule 14: Vectorised, clean, and explainable NumPy implementation.
+Design constraints:
+- Feature definitions and mathematical derivations documented clearly.
+- Vectorised, clean, and explainable NumPy implementation.
 """
 
 from __future__ import annotations

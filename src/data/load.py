@@ -29,12 +29,12 @@ Responsibilities:
 - Cache the merged DataFrame to `outputs/cache/motionsense.pickle` using pandas `to_pickle`
   (retaining fast binary serialization without requiring pyarrow).
 
-Rule compliance:
-- Rule 2: Raw data in MotionSense_dataset/ is strictly READ-ONLY.
-- Rule 3: Ignore __MACOSX folders and drop the unnamed index column.
-- Rule 10: Retain truthful logging of data curation decisions; no hidden filtering.
-- Rule 13: Detailed docstrings and provenance tracking.
-- Rule 14: Clear, explainable Python code.
+Design constraints:
+- Raw data in MotionSense_dataset/ is strictly READ-ONLY.
+- Ignore __MACOSX folders and drop the unnamed index column.
+- Retain truthful logging of data curation decisions; no hidden filtering.
+- Detailed docstrings and provenance tracking.
+- Clear, explainable Python code.
 """
 
 from __future__ import annotations
@@ -66,7 +66,7 @@ SENSOR_COLUMNS: list[str] = [
     "userAcceleration.z",
 ]
 
-# Activity code to integer label map (CW1_PLAN.md Section 1)
+# Activity code to integer label map
 LABEL_MAP: dict[str, int] = {
     "dws": 0,  # downstairs (trials 1, 2, 11)
     "ups": 1,  # upstairs   (trials 3, 4, 12)
@@ -177,7 +177,7 @@ def load_motionsense(
             # Read raw trial recording
             trial_df = pd.read_csv(file_full_path)
 
-            # Drop unnamed index column if present (Rule 3)
+            # Drop unnamed index column if present
             if trial_df.columns[0].startswith("Unnamed") or trial_df.columns[0] == "":
                 trial_df = trial_df.iloc[:, 1:]
 

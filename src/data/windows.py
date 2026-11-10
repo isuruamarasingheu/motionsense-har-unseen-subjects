@@ -11,11 +11,11 @@ Responsibilities:
   and per-window tracking metadata (subject, trial, start_index).
 - Save window metadata records per split to `outputs/splits/windows_<split>.csv`.
 
-Rule compliance:
-- Rule 4: Windows must never cross trial boundaries.
-- Rule 5: Splitting happens BEFORE windowing.
-- Rule 13: Docstrings explain why window boundaries must not cross trials.
-- Rule 14: Clean, explainable, and vectorised operations.
+Design constraints:
+- Windows must never cross trial boundaries.
+- Splitting happens BEFORE windowing.
+- Docstrings explain why window boundaries must not cross trials.
+- Clean, explainable, and vectorised operations.
 """
 
 from __future__ import annotations
@@ -157,7 +157,7 @@ def assert_no_window_spans_trials(
     Verify and assert that no window spans two trials or subject boundaries.
 
     Why:
-        Enforces Rule 4 and Rule 5. A window spanning multiple trials causes
+        A window spanning multiple trials causes
         label ambiguity and temporal discontinuity corruption.
 
     Args:

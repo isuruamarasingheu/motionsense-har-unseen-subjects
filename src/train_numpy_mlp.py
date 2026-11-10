@@ -11,12 +11,12 @@ Tasks:
 6. Train on 3000 samples with mini-batches (size 64), lr 0.05, early stopping patience 15 -> fig05_numpy_mlp_loss.png.
 7. Save outputs/metrics/numpy_mlp.json, training log CSV, checkpoint NPZ, and run_info.json.
 
-Rule compliance:
-- Rule 7: Never touch test set.
-- Rule 8: Save checkpoint, config copy, metrics JSON, training log, run_info.json.
-- Rule 9: Set all seeds from config.
-- Rule 10: Never invent or estimate numbers; log all metrics from execution.
-- Rule 12: Figures saved to outputs/figures/ with labelled axes and units.
+Design constraints:
+- Never touch test set.
+- Save checkpoint, config copy, metrics JSON, training log, run_info.json.
+- Set all seeds from config.
+- Never invent or estimate numbers; log all metrics from execution.
+- Figures saved to outputs/figures/ with labelled axes and units.
 """
 
 from __future__ import annotations

@@ -13,11 +13,11 @@ Architecture:
   by ReLU, with zeroed bias. Xavier initialisation for the classification head.
 - Output: 6 unnormalised activity logits for CrossEntropyLoss.
 
-Rule compliance:
-- Rule 1: PyTorch CPU framework implementation.
-- Rule 8: Architecture hyperparameters specified via YAML configuration.
-- Rule 13: Docstrings explain architectural choices and initialisation schemes.
-- Rule 14: Clear modular PyTorch nn.Module design.
+Design constraints:
+- PyTorch CPU framework implementation.
+- Architecture hyperparameters specified via YAML configuration.
+- Docstrings explain architectural choices and initialisation schemes.
+- Clear modular PyTorch nn.Module design.
 """
 
 from __future__ import annotations
@@ -135,7 +135,7 @@ def generate_layer_table_mlp(
     and parameter counts.
 
     Why:
-        Plan Section 3b requires a verifiable layer table saved to outputs/metrics/<model>_layers.md,
+        A verifiable layer table is saved to outputs/metrics/<model>_layers.md,
         confirming exact parameter counts and architectural compliance.
     """
     input_dim = model.input_dim

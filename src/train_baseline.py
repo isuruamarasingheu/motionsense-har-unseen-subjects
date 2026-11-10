@@ -9,13 +9,13 @@ Responsibilities:
 - Save trained baseline model using `joblib` into `outputs/checkpoints/baseline_rf_seed<seed>.joblib`.
 - Save validation metrics, configuration copy, and execution provenance via `write_run_info`.
 
-Rule compliance:
-- Rule 7: Do not evaluate or load the test split during training/validation.
-- Rule 8: Save checkpoints, config copy, metrics JSON, and run_info.json.
-- Rule 9: Seed Random Forest via `random_state`.
-- Rule 10: Never invent or estimate metrics; compute strictly from model predictions.
-- Rule 13: Docstrings explain methodology and hyperparameters.
-- Rule 14: Clear, idiomatic scikit-learn code.
+Design constraints:
+- Do not evaluate or load the test split during training/validation.
+- Save checkpoints, config copy, metrics JSON, and run_info.json.
+- Seed Random Forest via `random_state`.
+- Never invent or estimate metrics; compute strictly from model predictions.
+- Docstrings explain methodology and hyperparameters.
+- Clear, idiomatic scikit-learn code.
 """
 
 from __future__ import annotations

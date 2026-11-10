@@ -17,15 +17,15 @@ Responsibilities:
 - Provide `--smoke-test` mode: subset of 2 train subjects, 1 val subject, 1 epoch (< 1 min execution).
 - Save layer table markdown to `outputs/metrics/<model_name>_layers.md`.
 
-Rule compliance:
-- Rule 1: Python 3.11, PyTorch (CPU).
-- Rule 7: Never touch or evaluate the test split in this training script.
-- Rule 8: Save checkpoints, config copy, training log, and run_info.json for every run.
-- Rule 9: Set all seeds from config.
-- Rule 10: Log all training progression metrics directly from execution.
-- Rule 12: Loss curve plots saved as PNG (dpi 150) with titled axes and units.
-- Rule 13: Docstrings explain architecture, loss, and training loop details.
-- Rule 14: Clean, readable, modular implementation.
+Design constraints:
+- Python 3.11, PyTorch (CPU).
+- Never touch or evaluate the test split in this training script.
+- Save checkpoints, config copy, training log, and run_info.json for every run.
+- Set all seeds from config.
+- Log all training progression metrics directly from execution.
+- Loss curve plots saved as PNG (dpi 150) with titled axes and units.
+- Docstrings explain architecture, loss, and training loop details.
+- Clean, readable, modular implementation.
 """
 
 from __future__ import annotations
@@ -111,7 +111,7 @@ def load_dataset_splits(
     Load cached training and validation arrays.
 
     Why:
-        Rule 7 strictly restricts data loading to train and validation splits.
+        Data loading is restricted to the train and validation splits.
         Never loads X_test or y_test.
         For CNN, transposes raw arrays to (N, 12, 128) channels-first format.
     """
@@ -168,7 +168,7 @@ def plot_loss_curves(
     on a secondary y-axis, with marked best epoch and integer epoch ticks.
 
     Why:
-        Plan Section 3b & Rule 12: visual diagnosis of learning convergence,
+        Visual diagnosis of learning convergence,
         overfitting inflection points, and tracking selection noise on validation macro-F1.
     """
     epochs = [int(h["epoch"]) for h in history]

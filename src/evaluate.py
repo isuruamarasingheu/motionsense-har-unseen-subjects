@@ -30,14 +30,14 @@ Responsibilities:
     * `fig13_per_class_f1.png`: grouped bar chart of per-class test F1 (mean +/- std across 3 seeds)
     * `fig14_val_vs_test.png`: validation vs test macro-F1 comparison highlighting generalization gaps
 
-Rule compliance:
-- Rule 1: Python 3.11, NumPy, pandas, scikit-learn, PyTorch (CPU), matplotlib.
-- Rule 7: Test split accessed ONLY by src/evaluate.py after configs and checkpoints are frozen.
-- Rule 8: Persists structured metrics CSV, summary JSON, and prediction records.
-- Rule 10: Strictly empirical numbers derived from saved artifacts; never hard-coded or estimated.
-- Rule 12: All figures include informative titles, labelled axes with units, and complete legends.
-- Rule 13: Docstrings explain methodology, parameter counting, and representative seed selection.
-- Rule 14: Clear, idiomatic, well-commented code.
+Design constraints:
+- Python 3.11, NumPy, pandas, scikit-learn, PyTorch (CPU), matplotlib.
+- Test split accessed ONLY by src/evaluate.py after configs and checkpoints are frozen.
+- Persists structured metrics CSV, summary JSON, and prediction records.
+- Strictly empirical numbers derived from saved artifacts; never hard-coded or estimated.
+- All figures include informative titles, labelled axes with units, and complete legends.
+- Docstrings explain methodology, parameter counting, and representative seed selection.
+- Clear, idiomatic, well-commented code.
 """
 
 from __future__ import annotations
@@ -79,7 +79,7 @@ def load_test_data() -> tuple[np.ndarray, np.ndarray, np.ndarray, pd.DataFrame]:
     and window metadata.
 
     Why:
-        Rule 7 explicitly allows src/evaluate.py (and ONLY src/evaluate.py) to load
+        By design, only src/evaluate.py is allowed to load
         the test split. Scaled data arrays were transformed using scalers fitted
         strictly on training subjects in Phase 1c (outputs/preprocessing/feature_scaler.joblib
         and raw_scaler.joblib), guaranteeing zero test leakage.
@@ -406,7 +406,7 @@ def plot_per_class_f1(
     Generate grouped bar chart of per-class test F1 scores across the three architectures.
 
     Why:
-        Rule 12 & Plan Section 4a: Highlights architectural strengths and weaknesses
+        Highlights architectural strengths and weaknesses
         across individual human activities (e.g. stairs vs walking vs static postures).
     """
     models = ["baseline_rf", "pytorch_mlp", "pytorch_cnn_1d"]
@@ -461,7 +461,7 @@ def plot_val_vs_test(
     Generate validation vs test macro-F1 comparison plots across all 3 seeds and models.
 
     Why:
-        Plan Section 4a & Figure 14: Diagnoses the generalization gap between validation
+        Figure 14: Diagnoses the generalization gap between validation
         model selection and final unseen test performance, quantifying selection bias.
     """
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13.5, 5.5), dpi=150)
