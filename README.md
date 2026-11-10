@@ -245,7 +245,6 @@ ANN/
 │   ├── test_phase3_models.py            # Checks PyTorch models and Random Forest
 │   └── test_predict.py                  # Checks prediction CLI and error handling
 ├── .gitignore                           # Files excluded from git
-├── CW1_PLAN.md                          # Coursework plan
 ├── README.md                            # This file
 └── requirements.txt                     # Pinned dependencies (includes CPU PyTorch)
 ```
