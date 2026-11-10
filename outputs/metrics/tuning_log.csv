@@ -1,0 +1,19 @@
+trial_id,model_type,hyperparameters,val_macro_f1,val_accuracy,val_loss,best_epoch,n_params,duration_seconds
+rf_01,random_forest,"{""n_estimators"": 100, ""max_depth"": null, ""class_weight"": ""balanced""}",0.9269297861124604,0.9303904923599321,,,,2.42
+rf_02,random_forest,"{""n_estimators"": 100, ""max_depth"": 20, ""class_weight"": ""balanced""}",0.9294711618150173,0.932937181663837,,,,1.27
+rf_03,random_forest,"{""n_estimators"": 100, ""max_depth"": 10, ""class_weight"": ""balanced""}",0.9048610395230896,0.9094510469722694,,,,1.01
+rf_04,random_forest,"{""n_estimators"": 300, ""max_depth"": null, ""class_weight"": ""balanced""}",0.936758969002624,0.9388794567062818,,,,3.29
+rf_05,random_forest,"{""n_estimators"": 300, ""max_depth"": 20, ""class_weight"": ""balanced""}",0.9365250098355976,0.9397283531409168,,,,3.24
+rf_06,random_forest,"{""n_estimators"": 300, ""max_depth"": 10, ""class_weight"": ""balanced""}",0.9088479050526813,0.9128466327108092,,,,2.62
+mlp_01,pytorch_mlp,"{""hidden_sizes"": [128, 64], ""dropout"": 0.2, ""learning_rate"": 0.001, ""class_weight"": false}",0.955549291980455,0.9632144878324844,0.1346,11.0,19910.0,9.01
+mlp_02,pytorch_mlp,"{""hidden_sizes"": [128, 64], ""dropout"": 0.4, ""learning_rate"": 0.001, ""class_weight"": false}",0.9525855250272031,0.9598189020939445,0.1242,11.0,19910.0,13.46
+mlp_03,pytorch_mlp,"{""hidden_sizes"": [256, 128], ""dropout"": 0.2, ""learning_rate"": 0.001, ""class_weight"": false}",0.944373698512401,0.954442558007923,0.1436,8.0,56198.0,11.74
+mlp_04,pytorch_mlp,"{""hidden_sizes"": [256, 128], ""dropout"": 0.4, ""learning_rate"": 0.001, ""class_weight"": false}",0.9451002831641776,0.9533106960950763,0.142,2.0,56198.0,6.43
+mlp_05,pytorch_mlp,"{""hidden_sizes"": [128, 64], ""dropout"": 0.2, ""learning_rate"": 0.001, ""class_weight"": true}",0.9468852815778988,0.956140350877193,0.1627,11.0,19910.0,10.32
+mlp_06,pytorch_mlp,"{""hidden_sizes"": [256, 128], ""dropout"": 0.2, ""learning_rate"": 0.001, ""class_weight"": true}",0.9339272164352534,0.9479343520090548,0.1757,12.0,56198.0,12.13
+cnn_01,pytorch_cnn_1d,"{""filters"": [32, 64, 64], ""kernel_size"": 5, ""dropout"": 0.3, ""learning_rate"": 0.001}",0.9379279276268456,0.9485002829654782,0.1756,3.0,33510.0,26.01
+cnn_02,pytorch_cnn_1d,"{""filters"": [32, 64, 64], ""kernel_size"": 7, ""dropout"": 0.3, ""learning_rate"": 0.001}",0.9404766640541385,0.9504810413129599,0.2155,8.0,46566.0,40.95
+cnn_03,pytorch_cnn_1d,"{""filters"": [32, 64, 64], ""kernel_size"": 5, ""dropout"": 0.5, ""learning_rate"": 0.001}",0.9554277481781651,0.9646293152235428,0.1819,29.0,33510.0,93.02
+cnn_04,pytorch_cnn_1d,"{""filters"": [64, 128, 128], ""kernel_size"": 5, ""dropout"": 0.3, ""learning_rate"": 0.001}",0.9672983168404435,0.9728353140916808,0.0814,18.0,128454.0,131.82
+cnn_05,pytorch_cnn_1d,"{""filters"": [64, 128, 128], ""kernel_size"": 7, ""dropout"": 0.3, ""learning_rate"": 0.001}",0.9499766579636159,0.9617996604414262,0.185,9.0,179142.0,124.92
+cnn_06,pytorch_cnn_1d,"{""filters"": [64, 128, 128], ""kernel_size"": 5, ""dropout"": 0.5, ""learning_rate"": 0.001}",0.9637609932295247,0.9731182795698925,0.1445,5.0,128454.0,82.41

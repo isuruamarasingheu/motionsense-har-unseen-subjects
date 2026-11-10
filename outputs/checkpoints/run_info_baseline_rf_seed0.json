@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-11-10T05:45:31.429559+00:00",
+  "python_version": "3.11.9",
+  "numpy_version": "1.26.4",
+  "pandas_version": "2.3.2",
+  "torch_version": "2.15.0+cpu",
+  "sklearn_version": "1.7.2",
+  "matplotlib_version": "3.8.3",
+  "joblib_version": "1.5.2",
+  "torch_num_threads": 6,
+  "os": {
+    "system": "Windows",
+    "release": "10",
+    "version": "10.0.26200",
+    "machine": "AMD64"
+  },
+  "cpu_name": "11th Gen Intel(R) Core(TM) i5-11400H @ 2.70GHz",
+  "model": "baseline_rf",
+  "seed": 0,
+  "val_macro_f1": 0.936758969002624,
+  "val_accuracy": 0.9388794567062818,
+  "n_estimators": 300,
+  "max_depth": null
+}

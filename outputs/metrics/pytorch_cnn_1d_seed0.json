@@ -1,0 +1,25 @@
+{
+  "model_name": "pytorch_cnn_1d",
+  "seed": 0,
+  "total_trainable_parameters": 128454,
+  "best_epoch": 18,
+  "best_val_macro_f1": 0.9672983168404435,
+  "val_loss_at_best": 0.08135221010630542,
+  "val_accuracy_at_best": 0.9728353140916808,
+  "total_epochs_trained": 26,
+  "total_duration_seconds": 226.51809100000037,
+  "hyperparameters": {
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "use_class_weights": false,
+    "dropout": 0.3,
+    "hidden_sizes": null,
+    "filters": [
+      64,
+      128,
+      128
+    ],
+    "kernel_size": 5
+  }
+}

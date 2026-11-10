@@ -295,7 +295,7 @@ If training does not converge, show it and diagnose (lr too high/low, scaling) �
 
 ---
 
-### Phase 3 — T3 Baseline and framework models (14 marks)  ☐
+### Phase 3 — T3 Baseline and framework models (14 marks)  ☑
 
 #### 3a. Declare tuning budget FIRST
 
@@ -335,18 +335,18 @@ Implement:
 6. A function that prints a layer table (layer, output shape, activation, trainable params)
    using torch — save to outputs/metrics/<model>_layers.md. Total params must match
    sum(p.numel() for p in model.parameters() if p.requires_grad).
-Figures: fig07_mlp_loss_curves.png, fig08_cnn_loss_curves.png (train & val loss vs epoch,
+Figures: fig08_mlp_loss_curves.png, fig09_cnn_loss_curves.png (train & val loss vs epoch,
 marking the selected epoch).
 Do NOT load or touch the test split in any of these scripts.
 ```
 
 **Acceptance checks**
-- [ ] `tuning_budget.yaml` created before `tuning_log.csv` (check file timestamps)
-- [ ] `tuning_log.csv` has exactly the declared trials
-- [ ] Smoke test runs: `python -m src.train --config configs/cnn.yaml --smoke-test`
-- [ ] Layer tables with parameter counts for MLP and CNN
-- [ ] Loss curves for both, best epoch marked
-- [ ] grep confirms no script except `evaluate.py` reads the test split
+- [x] `tuning_budget.yaml` created before `tuning_log.csv` (check file timestamps)
+- [x] `tuning_log.csv` has exactly the declared trials
+- [x] Smoke test runs: `python -m src.train --config configs/cnn.yaml --smoke-test`
+- [x] Layer tables with parameter counts for MLP and CNN
+- [x] Loss curves for both, best epoch marked
+- [x] grep confirms no script except `evaluate.py` reads the test split
 
 **Supervision checkpoint → send Claude:** `tuning_log.csv`, final configs, both layer tables, both loss curves, RF val macro-F1.
 

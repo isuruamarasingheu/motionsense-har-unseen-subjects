@@ -1,0 +1,56 @@
+{
+  "selection_rule": {
+    "metric": "val_macro_f1",
+    "mode": "max",
+    "tuning_seed": 0
+  },
+  "best_models": {
+    "random_forest": {
+      "trial_id": "rf_04",
+      "val_macro_f1": 0.936758969002624,
+      "val_accuracy": 0.9388794567062818,
+      "hyperparameters": {
+        "n_estimators": 300,
+        "max_depth": null,
+        "class_weight": "balanced"
+      }
+    },
+    "mlp": {
+      "trial_id": "mlp_01",
+      "val_macro_f1": 0.955549291980455,
+      "val_accuracy": 0.9632144878324844,
+      "val_loss": 0.1346,
+      "best_epoch": 11,
+      "n_params": 19910,
+      "hyperparameters": {
+        "hidden_sizes": [
+          128,
+          64
+        ],
+        "dropout": 0.2,
+        "learning_rate": 0.001,
+        "class_weight": false
+      },
+      "final_config_path": "configs\\mlp_final.yaml"
+    },
+    "cnn": {
+      "trial_id": "cnn_04",
+      "val_macro_f1": 0.9672983168404435,
+      "val_accuracy": 0.9728353140916808,
+      "val_loss": 0.0814,
+      "best_epoch": 18,
+      "n_params": 128454,
+      "hyperparameters": {
+        "filters": [
+          64,
+          128,
+          128
+        ],
+        "kernel_size": 5,
+        "dropout": 0.3,
+        "learning_rate": 0.001
+      },
+      "final_config_path": "configs\\cnn_final.yaml"
+    }
+  }
+}

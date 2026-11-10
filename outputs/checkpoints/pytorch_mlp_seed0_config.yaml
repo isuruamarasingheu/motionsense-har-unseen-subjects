@@ -1,0 +1,20 @@
+model:
+  dropout: 0.2
+  hidden_sizes:
+  - 128
+  - 64
+  input_dim: 84
+  name: pytorch_mlp
+  num_classes: 6
+seeds:
+- 0
+- 1
+- 2
+training:
+  batch_size: 64
+  learning_rate: 0.001
+  loss: cross_entropy
+  max_epochs: 60
+  patience: 8
+  use_class_weights: false
+  weight_decay: 0.0001
