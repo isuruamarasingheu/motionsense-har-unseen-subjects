@@ -1,0 +1,270 @@
+{
+  "environment": {
+    "cpu_name": "11th Gen Intel(R) Core(TM) i5-11400H @ 2.70GHz",
+    "os": "Windows 10 (10.0.26200, AMD64)",
+    "python_version": "3.11.9",
+    "torch_version": "2.15.0+cpu",
+    "sklearn_version": "1.7.2",
+    "torch_num_threads": 6,
+    "timestamp": "2026-11-10 09:11:25 UTC"
+  },
+  "models": {
+    "baseline_rf": {
+      "model_key": "baseline_rf",
+      "display_name": "Random Forest",
+      "size_metric_name": "tree nodes",
+      "size_metric_value": 208268,
+      "trainable_parameters": null,
+      "tree_nodes": 208268,
+      "checkpoint_file_size_mb": 22.365853309631348,
+      "latency": {
+        "n_jobs_neg1": {
+          "model_only": {
+            "batch_1": {
+              "mean_ms": 26.456615999904898,
+              "std_ms": 3.0418358281285656,
+              "median_ms": 25.53859999989072,
+              "min_ms": 24.871100000382285,
+              "max_ms": 36.59489999881771,
+              "timed_runs": 100,
+              "warm_up_runs": 10
+            },
+            "batch_256": {
+              "mean_ms": 37.564549000016996,
+              "std_ms": 4.64261350068407,
+              "median_ms": 36.01379999963683,
+              "min_ms": 35.34550000040326,
+              "max_ms": 60.543699999470846,
+              "timed_runs": 100,
+              "warm_up_runs": 10,
+              "per_window_mean_ms": 0.1467365195313164,
+              "per_window_median_ms": 0.14067890624858137
+            }
+          },
+          "end_to_end": {
+            "batch_1": {
+              "mean_ms": 31.953103999931045,
+              "std_ms": 8.287175282512141,
+              "median_ms": 27.556799999729265,
+              "min_ms": 25.337700000818586,
+              "max_ms": 93.59779999977036,
+              "timed_runs": 100,
+              "warm_up_runs": 10
+            },
+            "batch_256": {
+              "mean_ms": 51.62122299996554,
+              "std_ms": 3.1389212614610273,
+              "median_ms": 50.81255000004603,
+              "min_ms": 49.7295999994094,
+              "max_ms": 69.74780000018654,
+              "timed_runs": 100,
+              "warm_up_runs": 10,
+              "per_window_mean_ms": 0.2016454023436154,
+              "per_window_median_ms": 0.1984865234376798
+            }
+          }
+        },
+        "n_jobs_1": {
+          "model_only": {
+            "batch_1": {
+              "mean_ms": 7.181607000038639,
+              "std_ms": 0.3471013548186296,
+              "median_ms": 7.094949999554956,
+              "min_ms": 6.833800000094925,
+              "max_ms": 9.180200000628247,
+              "timed_runs": 100,
+              "warm_up_runs": 10
+            },
+            "batch_256": {
+              "mean_ms": 11.443454000109341,
+              "std_ms": 0.3050876625545433,
+              "median_ms": 11.380150000150024,
+              "min_ms": 10.743499999080086,
+              "max_ms": 12.13859999916167,
+              "timed_runs": 100,
+              "warm_up_runs": 10,
+              "per_window_mean_ms": 0.04470099218792711,
+              "per_window_median_ms": 0.04445371093808603
+            }
+          },
+          "end_to_end": {
+            "batch_1": {
+              "mean_ms": 7.558305999900767,
+              "std_ms": 0.4295544548627285,
+              "median_ms": 7.469649999620742,
+              "min_ms": 7.278600000063307,
+              "max_ms": 11.164800000187824,
+              "timed_runs": 100,
+              "warm_up_runs": 10
+            },
+            "batch_256": {
+              "mean_ms": 25.59213099999397,
+              "std_ms": 2.6145937663200898,
+              "median_ms": 25.012250000145286,
+              "min_ms": 24.444700000458397,
+              "max_ms": 46.86939999919559,
+              "timed_runs": 100,
+              "warm_up_runs": 10,
+              "per_window_mean_ms": 0.09996926171872644,
+              "per_window_median_ms": 0.09770410156306752
+            }
+          }
+        },
+        "model_only": {
+          "batch_1": {
+            "mean_ms": 7.181607000038639,
+            "std_ms": 0.3471013548186296,
+            "median_ms": 7.094949999554956,
+            "min_ms": 6.833800000094925,
+            "max_ms": 9.180200000628247,
+            "timed_runs": 100,
+            "warm_up_runs": 10
+          },
+          "batch_256": {
+            "mean_ms": 37.564549000016996,
+            "std_ms": 4.64261350068407,
+            "median_ms": 36.01379999963683,
+            "min_ms": 35.34550000040326,
+            "max_ms": 60.543699999470846,
+            "timed_runs": 100,
+            "warm_up_runs": 10,
+            "per_window_mean_ms": 0.1467365195313164,
+            "per_window_median_ms": 0.14067890624858137
+          }
+        },
+        "end_to_end": {
+          "batch_1": {
+            "mean_ms": 7.558305999900767,
+            "std_ms": 0.4295544548627285,
+            "median_ms": 7.469649999620742,
+            "min_ms": 7.278600000063307,
+            "max_ms": 11.164800000187824,
+            "timed_runs": 100,
+            "warm_up_runs": 10
+          },
+          "batch_256": {
+            "mean_ms": 51.62122299996554,
+            "std_ms": 3.1389212614610273,
+            "median_ms": 50.81255000004603,
+            "min_ms": 49.7295999994094,
+            "max_ms": 69.74780000018654,
+            "timed_runs": 100,
+            "warm_up_runs": 10,
+            "per_window_mean_ms": 0.2016454023436154,
+            "per_window_median_ms": 0.1984865234376798
+          }
+        }
+      }
+    },
+    "pytorch_mlp": {
+      "model_key": "pytorch_mlp",
+      "display_name": "PyTorch MLP",
+      "size_metric_name": "trainable parameters",
+      "size_metric_value": 19910,
+      "trainable_parameters": 19910,
+      "tree_nodes": null,
+      "checkpoint_file_size_mb": 0.0835103988647461,
+      "latency": {
+        "model_only": {
+          "batch_1": {
+            "mean_ms": 0.09901400004309835,
+            "std_ms": 0.011438090132679067,
+            "median_ms": 0.09509999927104218,
+            "min_ms": 0.08920000072976109,
+            "max_ms": 0.15640000128769316,
+            "timed_runs": 100,
+            "warm_up_runs": 10
+          },
+          "batch_256": {
+            "mean_ms": 0.19785799997407594,
+            "std_ms": 0.01838497517356652,
+            "median_ms": 0.19315000008646166,
+            "min_ms": 0.18389999968349002,
+            "max_ms": 0.35010000101465266,
+            "timed_runs": 100,
+            "warm_up_runs": 10,
+            "per_window_mean_ms": 0.0007728828123987341,
+            "per_window_median_ms": 0.0007544921878377409
+          }
+        },
+        "end_to_end": {
+          "batch_1": {
+            "mean_ms": 0.4785099999571685,
+            "std_ms": 0.057386551273640896,
+            "median_ms": 0.46195000049920054,
+            "min_ms": 0.4014999994979007,
+            "max_ms": 0.6971000002522487,
+            "timed_runs": 100,
+            "warm_up_runs": 10
+          },
+          "batch_256": {
+            "mean_ms": 15.6044699999984,
+            "std_ms": 1.1314466949896824,
+            "median_ms": 15.184349999799451,
+            "min_ms": 14.310799999293522,
+            "max_ms": 18.219599998701597,
+            "timed_runs": 100,
+            "warm_up_runs": 10,
+            "per_window_mean_ms": 0.06095496093749375,
+            "per_window_median_ms": 0.05931386718671661
+          }
+        }
+      }
+    },
+    "pytorch_cnn_1d": {
+      "model_key": "pytorch_cnn_1d",
+      "display_name": "PyTorch 1D-CNN",
+      "size_metric_name": "trainable parameters",
+      "size_metric_value": 128454,
+      "trainable_parameters": 128454,
+      "tree_nodes": null,
+      "checkpoint_file_size_mb": 0.5006933212280273,
+      "latency": {
+        "model_only": {
+          "batch_1": {
+            "mean_ms": 0.37469100005182554,
+            "std_ms": 0.0650071902139464,
+            "median_ms": 0.35200000002078013,
+            "min_ms": 0.33199999961652793,
+            "max_ms": 0.8226000009017298,
+            "timed_runs": 100,
+            "warm_up_runs": 10
+          },
+          "batch_256": {
+            "mean_ms": 20.404908999917097,
+            "std_ms": 1.5120997406220635,
+            "median_ms": 20.686700000624114,
+            "min_ms": 14.864000000670785,
+            "max_ms": 24.4444999989355,
+            "timed_runs": 100,
+            "warm_up_runs": 10,
+            "per_window_mean_ms": 0.07970667578092616,
+            "per_window_median_ms": 0.08080742187743795
+          }
+        },
+        "end_to_end": {
+          "batch_1": {
+            "mean_ms": 0.44291900005191565,
+            "std_ms": 0.06480239829468323,
+            "median_ms": 0.4337999998824671,
+            "min_ms": 0.36560000080498867,
+            "max_ms": 0.7589999986521434,
+            "timed_runs": 100,
+            "warm_up_runs": 10
+          },
+          "batch_256": {
+            "mean_ms": 20.86076799991133,
+            "std_ms": 2.3279356643264753,
+            "median_ms": 21.538949999921897,
+            "min_ms": 15.715699999418575,
+            "max_ms": 24.376999999731197,
+            "timed_runs": 100,
+            "warm_up_runs": 10,
+            "per_window_mean_ms": 0.08148737499965364,
+            "per_window_median_ms": 0.08413652343719491
+          }
+        }
+      }
+    }
+  }
+}

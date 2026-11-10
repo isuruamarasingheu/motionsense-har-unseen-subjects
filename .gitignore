@@ -24,3 +24,7 @@ outputs/cache/
 .DS_Store
 Thumbs.db
 
+# Dynamic test samples generated from local dataset (Rule 2: do not redistribute raw data)
+samples/*.csv
+
+

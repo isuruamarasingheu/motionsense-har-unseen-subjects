@@ -1,0 +1,258 @@
+================================================================================
+MotionSense HAR CLI Inference Demonstration Log (Task T5b)
+Generated across all test samples for CNN (seed 2) and MLP (seed 0)
+================================================================================
+
+################################################################################
+# SAMPLE: valid_walking_subject8.csv
+################################################################################
+
+$ python -m src.predict --model cnn --input samples/valid_walking_subject8.csv
+[Exit Code: 0]
+Predicted activity: WALKING (mean confidence 0.95)
+Windows: 6
+
+Per-Class Mean Probability Table:
+Code   Activity       Mean Probability   Visual Bar
+-------------------------------------------------------
+dws    downstairs     0.0375             |=
+ups    upstairs       0.0103             |
+wlk    walking        0.9478             |========================
+jog    jogging        0.0033             |
+std    standing       0.0005             |
+sit    sitting        0.0006             |
+-------------------------------------------------------
+
+Per-Window Predictions (total 6 windows):
+Win #   Start..End     Predicted Activity Confidence
+-------------------------------------------------------
+1       0..128         WALKING (wlk)      0.9519
+2       64..192        WALKING (wlk)      0.9503
+3       128..256       WALKING (wlk)      0.9010
+4       192..320       WALKING (wlk)      0.9509
+5       256..384       WALKING (wlk)      0.9808
+6       320..448       WALKING (wlk)      0.9522
+-------------------------------------------------------
+
+------------------------------------------------------------
+
+$ python -m src.predict --model mlp --input samples/valid_walking_subject8.csv
+[Exit Code: 0]
+Predicted activity: WALKING (mean confidence 0.96)
+Windows: 6
+
+Per-Class Mean Probability Table:
+Code   Activity       Mean Probability   Visual Bar
+-------------------------------------------------------
+dws    downstairs     0.0251             |=
+ups    upstairs       0.0168             |
+wlk    walking        0.9567             |========================
+jog    jogging        0.0004             |
+std    standing       0.0011             |
+sit    sitting        0.0000             |
+-------------------------------------------------------
+
+Per-Window Predictions (total 6 windows):
+Win #   Start..End     Predicted Activity Confidence
+-------------------------------------------------------
+1       0..128         WALKING (wlk)      0.9952
+2       64..192        WALKING (wlk)      0.9912
+3       128..256       WALKING (wlk)      0.7991
+4       192..320       WALKING (wlk)      0.9646
+5       256..384       WALKING (wlk)      0.9974
+6       320..448       WALKING (wlk)      0.9927
+-------------------------------------------------------
+
+------------------------------------------------------------
+
+################################################################################
+# SAMPLE: failure_walking_subject1.csv
+################################################################################
+
+$ python -m src.predict --model cnn --input samples/failure_walking_subject1.csv
+[Exit Code: 0]
+Predicted activity: UPSTAIRS (mean confidence 0.98)
+Windows: 6
+
+Per-Class Mean Probability Table:
+Code   Activity       Mean Probability   Visual Bar
+-------------------------------------------------------
+dws    downstairs     0.0027             |
+ups    upstairs       0.9831             |=========================
+wlk    walking        0.0071             |
+jog    jogging        0.0069             |
+std    standing       0.0000             |
+sit    sitting        0.0001             |
+-------------------------------------------------------
+
+Per-Window Predictions (total 6 windows):
+Win #   Start..End     Predicted Activity Confidence
+-------------------------------------------------------
+1       0..128         UPSTAIRS (ups)     0.9793
+2       64..192        UPSTAIRS (ups)     0.9899
+3       128..256       UPSTAIRS (ups)     0.9859
+4       192..320       UPSTAIRS (ups)     0.9770
+5       256..384       UPSTAIRS (ups)     0.9787
+6       320..448       UPSTAIRS (ups)     0.9878
+-------------------------------------------------------
+
+------------------------------------------------------------
+
+$ python -m src.predict --model mlp --input samples/failure_walking_subject1.csv
+[Exit Code: 0]
+Predicted activity: UPSTAIRS (mean confidence 0.98)
+Windows: 6
+
+Per-Class Mean Probability Table:
+Code   Activity       Mean Probability   Visual Bar
+-------------------------------------------------------
+dws    downstairs     0.0012             |
+ups    upstairs       0.9829             |=========================
+wlk    walking        0.0088             |
+jog    jogging        0.0067             |
+std    standing       0.0003             |
+sit    sitting        0.0001             |
+-------------------------------------------------------
+
+Per-Window Predictions (total 6 windows):
+Win #   Start..End     Predicted Activity Confidence
+-------------------------------------------------------
+1       0..128         UPSTAIRS (ups)     0.9693
+2       64..192        UPSTAIRS (ups)     0.9662
+3       128..256       UPSTAIRS (ups)     0.9935
+4       192..320       UPSTAIRS (ups)     0.9902
+5       256..384       UPSTAIRS (ups)     0.9837
+6       320..448       UPSTAIRS (ups)     0.9947
+-------------------------------------------------------
+
+------------------------------------------------------------
+
+################################################################################
+# SAMPLE: invalid_short.csv
+################################################################################
+
+$ python -m src.predict --model cnn --input samples/invalid_short.csv
+[Exit Code: 1]
+[STDERR]
+Error: Input CSV has only 60 rows. Need at least 2.56 s of data at 50 Hz (128 samples).
+
+------------------------------------------------------------
+
+$ python -m src.predict --model mlp --input samples/invalid_short.csv
+[Exit Code: 1]
+[STDERR]
+Error: Input CSV has only 60 rows. Need at least 2.56 s of data at 50 Hz (128 samples).
+
+------------------------------------------------------------
+
+################################################################################
+# SAMPLE: invalid_columns.csv
+################################################################################
+
+$ python -m src.predict --model cnn --input samples/invalid_columns.csv
+[Exit Code: 1]
+[STDERR]
+Error: Missing required sensor column(s): ['userAcceleration.z']. Input must contain all 12 MotionSense sensor columns: ['attitude.roll', 'attitude.pitch', 'attitude.yaw', 'gravity.x', 'gravity.y', 'gravity.z', 'rotationRate.x', 'rotationRate.y', 'rotationRate.z', 'userAcceleration.x', 'userAcceleration.y', 'userAcceleration.z'].
+
+------------------------------------------------------------
+
+$ python -m src.predict --model mlp --input samples/invalid_columns.csv
+[Exit Code: 1]
+[STDERR]
+Error: Missing required sensor column(s): ['userAcceleration.z']. Input must contain all 12 MotionSense sensor columns: ['attitude.roll', 'attitude.pitch', 'attitude.yaw', 'gravity.x', 'gravity.y', 'gravity.z', 'rotationRate.x', 'rotationRate.y', 'rotationRate.z', 'userAcceleration.x', 'userAcceleration.y', 'userAcceleration.z'].
+
+------------------------------------------------------------
+
+################################################################################
+# SAMPLE: invalid_nan.csv
+################################################################################
+
+$ python -m src.predict --model cnn --input samples/invalid_nan.csv
+[Exit Code: 1]
+[STDERR]
+Error: Non-numeric, NaN, or Inf values found at row index/indices: [12, 25, 50].
+
+------------------------------------------------------------
+
+$ python -m src.predict --model mlp --input samples/invalid_nan.csv
+[Exit Code: 1]
+[STDERR]
+Error: Non-numeric, NaN, or Inf values found at row index/indices: [12, 25, 50].
+
+------------------------------------------------------------
+
+################################################################################
+# SAMPLE: out_of_scope_scaled.csv
+################################################################################
+
+$ python -m src.predict --model cnn --input samples/out_of_scope_scaled.csv
+[Exit Code: 0]
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+OUT-OF-SCOPE WARNING(S) DETECTED:
+  [!] Channel 'userAcceleration.x' has values outside training range by >10% (observed range [-12.5763, 12.9624], training bound [-7.7183, 8.4698]). Input exhibits large domain shift; prediction may be unreliable.
+  [!] Channel 'userAcceleration.y' has values outside training range by >10% (observed range [-15.9209, 22.4323], training bound [-6.9732, 8.6224]). Input exhibits large domain shift; prediction may be unreliable.
+  [!] Channel 'userAcceleration.z' has values outside training range by >10% (observed range [-11.9723, 10.3427], training bound [-9.3304, 9.7122]). Input exhibits large domain shift; prediction may be unreliable.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Predicted activity: JOGGING (mean confidence 1.00)
+Windows: 6
+
+Per-Class Mean Probability Table:
+Code   Activity       Mean Probability   Visual Bar
+-------------------------------------------------------
+dws    downstairs     0.0000             |
+ups    upstairs       0.0000             |
+wlk    walking        0.0000             |
+jog    jogging        1.0000             |=========================
+std    standing       0.0000             |
+sit    sitting        0.0000             |
+-------------------------------------------------------
+
+Per-Window Predictions (total 6 windows):
+Win #   Start..End     Predicted Activity Confidence
+-------------------------------------------------------
+1       0..128         JOGGING (jog)      1.0000
+2       64..192        JOGGING (jog)      1.0000
+3       128..256       JOGGING (jog)      1.0000
+4       192..320       JOGGING (jog)      1.0000
+5       256..384       JOGGING (jog)      1.0000
+6       320..448       JOGGING (jog)      1.0000
+-------------------------------------------------------
+
+------------------------------------------------------------
+
+$ python -m src.predict --model mlp --input samples/out_of_scope_scaled.csv
+[Exit Code: 0]
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+OUT-OF-SCOPE WARNING(S) DETECTED:
+  [!] Channel 'userAcceleration.x' has values outside training range by >10% (observed range [-12.5763, 12.9624], training bound [-7.7183, 8.4698]). Input exhibits large domain shift; prediction may be unreliable.
+  [!] Channel 'userAcceleration.y' has values outside training range by >10% (observed range [-15.9209, 22.4323], training bound [-6.9732, 8.6224]). Input exhibits large domain shift; prediction may be unreliable.
+  [!] Channel 'userAcceleration.z' has values outside training range by >10% (observed range [-11.9723, 10.3427], training bound [-9.3304, 9.7122]). Input exhibits large domain shift; prediction may be unreliable.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Predicted activity: JOGGING (mean confidence 1.00)
+Windows: 6
+
+Per-Class Mean Probability Table:
+Code   Activity       Mean Probability   Visual Bar
+-------------------------------------------------------
+dws    downstairs     0.0000             |
+ups    upstairs       0.0000             |
+wlk    walking        0.0000             |
+jog    jogging        1.0000             |=========================
+std    standing       0.0000             |
+sit    sitting        0.0000             |
+-------------------------------------------------------
+
+Per-Window Predictions (total 6 windows):
+Win #   Start..End     Predicted Activity Confidence
+-------------------------------------------------------
+1       0..128         JOGGING (jog)      1.0000
+2       64..192        JOGGING (jog)      1.0000
+3       128..256       JOGGING (jog)      1.0000
+4       192..320       JOGGING (jog)      1.0000
+5       256..384       JOGGING (jog)      1.0000
+6       320..448       JOGGING (jog)      1.0000
+-------------------------------------------------------
+
+------------------------------------------------------------

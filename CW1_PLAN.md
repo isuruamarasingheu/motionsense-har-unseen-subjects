@@ -411,7 +411,7 @@ In src/experiments.py add:
 
 ---
 
-### Phase 5 — T5 Recommendation & inference (8 marks)  ☐
+### Phase 5 — T5 Recommendation & inference (8 marks)  ☑
 
 **Prompt for Antigravity:**
 ```
@@ -435,8 +435,8 @@ In src/experiments.py add:
 ```
 
 **Acceptance checks**
-- [ ] Valid sample → sensible prediction; both invalid samples → clean error message (no traceback)
-- [ ] Timing table states batch size, thread count, CPU model
+- [x] Valid sample → sensible prediction; both invalid samples → clean error message (no traceback)
+- [x] Timing table states batch size, thread count, CPU model
 
 **Supervision checkpoint → send Claude:** benchmark table, predict.py output for all 3 samples. We will write the recommendation (T5a) and limitations (T5c) together from the evidence.
 
