@@ -815,9 +815,13 @@ def run_noise_stress_test() -> dict[str, Any]:
         sig_data = {}
         for sig in sigma_levels:
             vals = noise_evaluations[m_key][str(sig)]
+            # vals has 15 entries ordered repeat-major: index = repeat*3 + seed_idx
+            seed_means = [float(np.mean(vals[k::3])) for k in range(3)]
+            std_across_seeds = float(np.std(seed_means, ddof=1))
             sig_data[str(sig)] = {
                 "mean_macro_f1": float(np.mean(vals)),
                 "std_macro_f1": float(np.std(vals, ddof=1)),
+                "std_across_seeds": std_across_seeds,
                 "min_macro_f1": float(np.min(vals)),
                 "max_macro_f1": float(np.max(vals)),
                 "raw_values": vals,
@@ -867,7 +871,10 @@ def plot_noise_robustness(
     for m_key in ["baseline_rf", "pytorch_mlp", "pytorch_cnn_1d"]:
         m_info = noise_summary["results_by_model"][m_key]
         means = [m_info["sigmas"][str(s)]["mean_macro_f1"] for s in sigma_levels]
-        stds = [m_info["sigmas"][str(s)]["std_macro_f1"] for s in sigma_levels]
+        stds = [
+            m_info["sigmas"][str(s)].get("std_across_seeds", m_info["sigmas"][str(s)]["std_macro_f1"])
+            for s in sigma_levels
+        ]
         means_arr = np.array(means)
         stds_arr = np.array(stds)
 
@@ -878,7 +885,7 @@ def plot_noise_robustness(
             marker=marker_map[m_key],
             lw=2.2,
             markersize=7,
-            label=f"{m_info['display_name']} (Mean ± Std)",
+            label=f"{m_info['display_name']} (Mean ± Seed Std)",
         )
         ax.fill_between(
             sigma_levels,
@@ -904,6 +911,31 @@ def plot_noise_robustness(
     plt.close(fig)
     logger.info(f"Saved noise robustness figure to {fig_noise_path}")
     return fig_noise_path
+
+
+def regenerate_noise_summary_from_raw(
+    noise_res_path: Path = Path("outputs/metrics/noise_robustness.json"),
+    fig_noise_path: Path = Path("outputs/figures/fig17_noise_robustness.png"),
+) -> dict[str, Any]:
+    """
+    Regenerate noise_robustness.json summary fields and fig17 from existing raw_values only,
+    computing std_across_seeds without re-evaluating any models or touching test data.
+    """
+    noise_data = load_json(noise_res_path)
+    sigma_levels = [float(s) for s in noise_data["protocol"]["sigma_levels"]]
+
+    for m_key, m_info in noise_data["results_by_model"].items():
+        for s_str, s_data in m_info["sigmas"].items():
+            vals = s_data["raw_values"]
+            seed_means = [float(np.mean(vals[k::3])) for k in range(3)]
+            s_data["std_across_seeds"] = float(np.std(seed_means, ddof=1))
+            s_data["mean_macro_f1"] = float(np.mean(seed_means))
+
+    save_json(noise_data, noise_res_path)
+    logger.info(f"Regenerated summary fields in {noise_res_path} with std_across_seeds.")
+
+    plot_noise_robustness(noise_data, sigma_levels, fig_noise_path=fig_noise_path)
+    return noise_data
 
 
 # ==============================================================================
@@ -1076,9 +1108,14 @@ def main() -> None:
     parser.add_argument("--ablation", action="store_true", help="Run Task T4c ablation study.")
     parser.add_argument("--errors", action="store_true", help="Run Task T4d error analysis.")
     parser.add_argument("--noise", action="store_true", help="Run Task T4d noise stress test.")
+    parser.add_argument("--regenerate-noise", action="store_true", help="Regenerate noise summary and fig17 from raw_values.")
     parser.add_argument("--subgroup", action="store_true", help="Run Task T4d subgroup analysis.")
     parser.add_argument("--all", action="store_true", help="Run all tasks (T4c and T4d).")
     args = parser.parse_args()
+
+    if args.regenerate_noise:
+        regenerate_noise_summary_from_raw()
+        return
 
     # If no flags passed, default to --all
     run_all = args.all or not (args.ablation or args.errors or args.noise or args.subgroup)

@@ -474,9 +474,9 @@ def load_frozen_quality_metrics() -> dict[str, dict[str, Any]]:
             "worst_subject_id": worst_sub_id,
             "worst_subject_f1": worst_sub_f1,
             "noise_025_mean": float(n025["mean_macro_f1"]),
-            "noise_025_std": float(n025["std_macro_f1"]),
+            "noise_025_std": float(n025.get("std_across_seeds", n025["std_macro_f1"])),
             "noise_050_mean": float(n050["mean_macro_f1"]),
-            "noise_050_std": float(n050["std_macro_f1"]),
+            "noise_050_std": float(n050.get("std_across_seeds", n050["std_macro_f1"])),
         }
 
     return evidence
