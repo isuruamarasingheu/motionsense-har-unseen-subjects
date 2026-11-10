@@ -44,7 +44,7 @@ def build_and_run_notebook() -> None:
     c1_md = """# 06_recommendation_inference.ipynb — Model Recommendation Evidence, Inference Pipeline & Limitations
 
 **Module:** NB6057CEM Artificial Neural Networks — CW1 Practical  
-**Task:** Task T5a, T5b & T5c — Model Benchmarking, Evidence Matrix, Inference CLI & Limitations (8 marks)  
+**Task:** Task T5a, T5b & T5c — Benchmarking, Evidence, Recommendation, Inference CLI & Limitations (8 marks); plus a T6b config-to-result trace  
 **Dataset:** MotionSense (A_DeviceMotion_data) — Malekzadeh et al. (2018/2019)  
 
 ---
@@ -62,7 +62,7 @@ Task T5 evaluates the translation of empirical machine learning models into real
 2. **Recommendation Evidence Matrix (Task T5a)**:
    - Combine validation and test macro-F1, worst-subject test F1, noise robustness at $\\sigma \\in \\{0.25, 0.50\\}$, parameter counts, file sizes, and CPU latencies into a structured evidence table (`outputs/metrics/recommendation_evidence.csv`).
    - Plot Figure 19: Latency vs Test Macro-F1 trade-off (`outputs/figures/fig19_tradeoff.png`).
-   - *Note:* Per coursework instructions, this notebook produces only the factual evidence table without subjective recommendation prose, enabling transparent evaluation.
+   - Give a recommendation that follows from this evidence, including when a simpler model is preferable (section 3).
 3. **Inference CLI Pipeline (Task T5b)**:
    - Provide a modular CLI engine (`src/predict.py`) operating on arbitrary 50 Hz MotionSense sensor recordings.
    - Implement strict input integrity validation with clear error messages and non-zero exit codes (no Python tracebacks).
@@ -94,7 +94,7 @@ print(f"Working directory: {Path.cwd()}")
 
 To ensure scientific reproducibility, latency profiling was executed under standardized hardware conditions:
 - **Processor**: Intel 11th Gen Core i5-11400H @ 2.70 GHz (6 physical cores, 12 threads).
-- **Execution Mode**: CPU-only inference, strictly matching real-world edge wearable device constraints.
+- **Execution Mode**: CPU-only inference on a laptop. A phone would be slower, so these timings compare the models with each other rather than predicting phone latency.
 - **PyTorch Threading**: Pinned to 6 threads (`torch.set_num_threads(6)`).
 - **Profiling Input**: **Validation windows strictly** (`outputs/cache/X_val_raw.npy`, `X_val_feat_scaled.npy`, `X_val_raw_scaled.npy`). In strict adherence to Project Rules, the test set was **never loaded or unblinded** for timing.
 - **Timing Protocol**: High-resolution `time.perf_counter()` over 100 timed runs following 10 warm-up runs to eliminate JIT compilation, caching, and CPU frequency governor artifacts.
@@ -158,7 +158,7 @@ ipd.display(df_bench)
 
 The table below synthesises the complete empirical evidence across accuracy, generalisation gap, demographic fairness, sensor noise robustness, model size, and inference latency.
 
-*Note on Coursework Constraints:* Per project instructions, this section provides the **factual evidence table only**, without a subjective narrative recommendation. All numbers originate strictly from saved artifacts (`results_summary.json`, `noise_robustness.json`, `subgroup.json`, `benchmark.json`).
+The recommendation based on this table is given in section 3. All numbers originate strictly from saved artifacts (`results_summary.json`, `noise_robustness.json`, `subgroup.json`, `benchmark.json`).
 """
     cells.append(nbf.v4.new_markdown_cell(c5_md))
 
@@ -184,18 +184,18 @@ Figure 19 illustrates the multi-objective Pareto trade-off between **held-out te
 
 ### Key Empirical Findings:
 1. **Random Forest Baseline**:
-   - Achieves the highest test macro-F1 ($0.8860 \\pm 0.0016$) and highest worst-subject test score ($0.8244$ on Subject 18).
+   - Ties with the MLP for the highest test macro-F1 ($0.8860 \\pm 0.0016$ vs $0.8849 \\pm 0.0078$) and has the highest worst-subject test score ($0.8244$ on Subject 18).
    - High memory/disk footprint ($22.37\\text{ MB}$) due to storing 300 deep unpruned decision trees ($208,268$ total nodes).
    - Single-window latency: With single-threaded execution (`n_jobs=1`), single-window latency is $7.56\\text{ ms}$ (drastically reducing overhead compared to multi-threaded `n_jobs=-1` at $31.95\\text{ ms}$, where thread-pool dispatch overhead dominates single-sample evaluation).
 2. **PyTorch MLP**:
    - Ultra-lightweight footprint: $19,910$ parameters ($0.08\\text{ MB}$ checkpoint).
    - Competitive test macro-F1 ($0.8849 \\pm 0.0078$), matching Random Forest within error margins.
    - Extremely rapid single-window end-to-end latency ($0.48\\text{ ms}$).
-   - Vulnerable to sensor noise: F1 collapses to $0.7467$ at $\\sigma=0.25$ and $0.2166$ at $\\sigma=0.50$.
+   - Vulnerable to sensor noise: F1 drops to $0.7467$ at $\\sigma=0.25$ and collapses to $0.2166$ at $\\sigma=0.50$.
 3. **PyTorch 1D-CNN**:
    - Eliminates feature engineering: directly processes raw 12-channel motion streams ($0.44\\text{ ms}$ single-window end-to-end latency).
    - Highest noise robustness: retains $\\text{F1} = 0.8518$ at $\\sigma=0.25$ and $\\text{F1} = 0.6064$ at $\\sigma=0.50$ (where tabular models fail).
-   - Slightly wider inter-seed variance ($0.8615 \\pm 0.0293$) on the held-out test split.
+   - Lowest clean test macro-F1 and the largest seed-to-seed spread ($0.8615 \\pm 0.0293$, about 4 times the MLP's $\\pm 0.0078$).
 """
     cells.append(nbf.v4.new_markdown_cell(c7_md))
 
@@ -208,10 +208,24 @@ else:
 """
     cells.append(nbf.v4.new_code_cell(c8_code))
 
+    # Recommendation (Task T5a)
+    rec_md = """### Recommendation (Task T5a)
+
+**I recommend the PyTorch MLP** for an activity-tracking phone app used by new people.
+
+- **Accuracy:** its test macro-F1 (0.885 ± 0.008) is the same as the Random Forest's (0.886 ± 0.002) within seed-to-seed variation.
+- **Size and speed:** it is about 280 times smaller (0.08 MB vs 22.37 MB) and about 16 times faster per window (0.48 ms vs 7.56 ms, batch size 1, end-to-end, on the laptop CPU above). Both matter on a phone.
+- **When the simpler model is better:** the Random Forest is the safer choice when consistent results matter most. It varied least between seeds, had the best worst-subject score (0.824 on subject 18), and coped better with the tilted-phone recording (49% of windows wrong, vs 96% for the MLP and 98% for the CNN).
+- **When the CNN is better:** only if noisy sensor input is expected. It kept 0.606 macro-F1 at noise level σ = 0.5, while the MLP fell to 0.217 and the Random Forest to 0.233. On clean data it is the least accurate (0.861) and the least stable (± 0.029).
+
+**Not deployment-ready:** all models score 0.04–0.09 lower on test than on validation, the test set has only 4 people, and the tilted-phone recording defeats the recommended MLP (section 4.2).
+"""
+    cells.append(nbf.v4.new_markdown_cell(rec_md))
+
     # Cell 9: Markdown - Inference CLI Engine Overview
     c9_md = """## 4. Practical Real-Time Inference CLI Pipeline (Task T5b)
 
-The inference module `src/predict.py` implements a production-ready, trial-bounded HAR inference engine:
+The inference module `src/predict.py` is a working command-line prototype (not deployment-ready; see section 6):
 - **CLI Syntax**:
   ```bash
   python -m src.predict --model {rf,mlp,cnn} --input <file.csv> [--seed K] [--json]
