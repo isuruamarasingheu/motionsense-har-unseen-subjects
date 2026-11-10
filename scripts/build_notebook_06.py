@@ -378,17 +378,46 @@ ipd.display(ipd.Image(filename=str(fig11_path), width=600))
     # Cell 15: Markdown - Limitations & Future Work (Task T5c)
     c15_md = """## 6. Limitations & Future Directions (Task T5c)
 
+These results are useful for comparing the three models with each other. They do **not** show that any of them is ready to be used in a real app. This section explains why.
+
 ### Dataset bias
-24 people aged 18–46, one phone model and one way of carrying it, and test results come from only 4 people.
+
+**What the problem is:** the data comes from a small and very similar group.
+- Only **24 people**, all adults aged **18 to 46**. There are no children or people over 46, and the dataset says nothing about people with mobility problems (for example walking with a stick).
+- Everyone used the **same phone model** (an iPhone) and carried it in the **same way**. A different phone, or a phone in a bag, hand or jacket, would give different signals.
+- The activities were recorded as planned trials, not during normal daily life, so they may be "cleaner" than real movement.
+- The classes are uneven: in training there are 3,488 sitting windows but only 1,226 downstairs windows.
+
+**Why it matters:** a model can only learn what it has seen. People who move differently from these 24 are likely to get worse predictions, and we have no data to measure how much worse.
 
 ### Generalisation
-Every model scores 0.04–0.09 lower on test than on validation, and recordings with a tilted phone fail badly (see section 4.2). No model here is ready for real use on this evidence alone.
+
+**What the problem is:** the models do worse on new people, and some recordings break them completely.
+- Every model scored **0.04 to 0.09 lower** on the 4 test people than on the 4 validation people. New people are harder than the numbers on validation suggest.
+- The test score comes from only **4 people**. One unusual person can move the result a lot, so the "true" score for the general public could be noticeably higher or lower.
+- **Tilted phone (subject 1, walking trial 7):** the phone sat at a different angle in the pocket. The MLP got 96% of windows wrong and the CNN 98%; the Random Forest did better but still got 49% wrong. Instead of walking, the CNN mostly predicted "upstairs" and the MLP "upstairs" or "jogging", often with high confidence.
+- **Another walking recording (subject 21, trial 7)** also fails for all three models (86–93% of windows wrong). We have not yet found the cause, which shows we do not fully understand where the models break.
+- The models are often **confidently wrong** (for example 0.98 confidence for the wrong activity), so the confidence score cannot be trusted to warn the user.
+
+**Why it matters:** an app built on these models would work well for some people and badly for others, and it could not tell which is which.
 
 ### Privacy & misuse
-Motion data can reveal identity (walking style), health and daily routine. Predictions should run on the phone itself, with the user's consent, and raw signals should not be uploaded.
+
+**What the problem is:** motion data is more personal than it looks.
+- The way someone walks is close to a **fingerprint**: it can be used to identify a person.
+- Activity patterns can reveal **health** (for example, slowing down over time, or difficulty with stairs) and **daily routine** (when someone is home, asleep or out).
+- The same model could be **misused** to track people without their knowledge, for example by an employer or an insurer.
+
+**What should be done:** run predictions **on the phone itself** so raw sensor data never leaves the device, ask for clear **consent**, store only the predicted activity (not the raw signals), and let users delete their data.
 
 ### Next experiment
-Train on randomly rotated signals and re-test on the tilted recordings, using the same subject split and macro-F1.
+
+**Idea:** many errors seem to come from the phone being held at a different angle. So, during training, **randomly rotate the sensor signals** to imitate the phone being tilted in different ways. This teaches the model that the same movement can look different depending on how the phone sits.
+
+**How to test it fairly:**
+- Keep everything else the same: the same subject split, the same 3 seeds, the same settings, chosen on validation only.
+- Compare against the current MLP using macro-F1 on the test set, and look at the tilted recording (subject 1, walking trial 7) separately.
+- **The idea has failed if** test macro-F1 does not improve beyond the seed-to-seed variation, or if the tilted recording is still mostly wrong.
 """
     cells.append(nbf.v4.new_markdown_cell(c15_md))
 

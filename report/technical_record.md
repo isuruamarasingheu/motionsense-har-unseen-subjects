@@ -1,7 +1,7 @@
 # Technical Record — Human Activity Recognition on Unseen People (MotionSense)
 
 **Module:** NB6057CEM Artificial Neural Networks — CW1 Practical
-**Student ID:** [ADD]
+**Student ID:** KIC-BSCCSAI-251P-042
 **Repository:** https://github.com/isuruamarasingheu/motionsense-har-unseen-subjects
 **Word count (excluding tables and captions):** ≈1,490 [recount after your edits]
 
