@@ -1,6 +1,6 @@
-# Human Activity Recognition with MotionSense (CW1 Practical)
+# Human Activity Recognition with MotionSense
 
-**Module:** NB6057CEM Artificial Neural Networks  
+**Module:** Artificial Neural Networks  
 **Task:** Classify phone sensor data into 6 activities (`dws`: downstairs, `ups`: upstairs, `wlk`: walking, `jog`: jogging, `sit`: sitting, `std`: standing)  
 **Dataset:** MotionSense (A_DeviceMotion_data) — Malekzadeh et al. (2018/2019)  
 **Runs on:** CPU only (Python 3.11, PyTorch CPU, scikit-learn, NumPy)
