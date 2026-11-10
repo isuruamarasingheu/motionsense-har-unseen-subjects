@@ -1,0 +1,662 @@
+{
+  "baseline_rf": {
+    "model_name": "baseline_rf",
+    "representative_seed": {
+      "seed": 1,
+      "selection_criterion": "median validation macro-F1",
+      "val_macro_f1": 0.9275509851454995,
+      "reason": "Median validation macro-F1 (0.9276) across seeds 0, 1, 2 (0.9368, 0.9276, 0.9264). Selected strictly on validation performance prior to unblinding test split."
+    },
+    "summary": {
+      "val_macro_f1_mean": 0.9302320010727515,
+      "val_macro_f1_std": 0.005682451212558842,
+      "val_accuracy_mean": 0.9335974344463308,
+      "val_accuracy_std": 0.004583109078761129,
+      "test_macro_f1_mean": 0.8860284457065494,
+      "test_macro_f1_std": 0.0016288145665388349,
+      "test_accuracy_mean": 0.8819481680071494,
+      "test_accuracy_std": 0.0021669983293980347,
+      "per_class_test_f1_mean": {
+        "dws": 0.9010271816608277,
+        "ups": 0.771904020473685,
+        "wlk": 0.8200571809756974,
+        "jog": 0.9770061226701344,
+        "std": 0.9265684089062204,
+        "sit": 0.919607759552731
+      },
+      "per_class_test_f1_std": {
+        "dws": 0.010786627990316218,
+        "ups": 0.0033580744785181955,
+        "wlk": 0.0014381551276097472,
+        "jog": 0.000768377004062128,
+        "std": 0.004180764619073131,
+        "sit": 0.0055778362487513364
+      }
+    },
+    "seeds": {
+      "0": {
+        "seed": 0,
+        "best_epoch": "N/A",
+        "n_params": 208746,
+        "checkpoint_path": "outputs\\checkpoints\\baseline_rf_seed0.joblib",
+        "val_macro_f1": 0.936758969002624,
+        "val_accuracy": 0.9388794567062818,
+        "test_macro_f1": 0.8859789777835433,
+        "test_accuracy": 0.8806970509383378,
+        "classification_report": {
+          "dws": {
+            "precision": 0.9230769230769231,
+            "recall": 0.9038961038961039,
+            "f1-score": 0.9133858267716536,
+            "support": 385.0
+          },
+          "ups": {
+            "precision": 0.6391752577319587,
+            "recall": 0.9623059866962306,
+            "f1-score": 0.768141592920354,
+            "support": 451.0
+          },
+          "wlk": {
+            "precision": 0.9457478005865103,
+            "recall": 0.7230941704035875,
+            "f1-score": 0.8195679796696315,
+            "support": 892.0
+          },
+          "jog": {
+            "precision": 0.9973404255319149,
+            "recall": 0.9566326530612245,
+            "f1-score": 0.9765625,
+            "support": 392.0
+          },
+          "std": {
+            "precision": 0.8582169709989259,
+            "recall": 0.99875,
+            "f1-score": 0.9231658001155402,
+            "support": 800.0
+          },
+          "sit": {
+            "precision": 0.9985401459854014,
+            "recall": 0.8444444444444444,
+            "f1-score": 0.9150501672240803,
+            "support": 810.0
+          },
+          "accuracy": 0.8806970509383378,
+          "macro avg": {
+            "precision": 0.8936829206519392,
+            "recall": 0.8981872264169318,
+            "f1-score": 0.8859789777835433,
+            "support": 3730.0
+          },
+          "weighted avg": {
+            "precision": 0.9044526103487192,
+            "recall": 0.8806970509383378,
+            "f1-score": 0.8824868137060093,
+            "support": 3730.0
+          }
+        }
+      },
+      "1": {
+        "seed": 1,
+        "best_epoch": "N/A",
+        "n_params": 208268,
+        "checkpoint_path": "outputs\\checkpoints\\baseline_rf_seed1.joblib",
+        "val_macro_f1": 0.9275509851454995,
+        "val_accuracy": 0.931239388794567,
+        "test_macro_f1": 0.8876814307499233,
+        "test_accuracy": 0.8844504021447721,
+        "classification_report": {
+          "dws": {
+            "precision": 0.9069148936170213,
+            "recall": 0.8857142857142857,
+            "f1-score": 0.8961892247043364,
+            "support": 385.0
+          },
+          "ups": {
+            "precision": 0.6491754122938531,
+            "recall": 0.9600886917960089,
+            "f1-score": 0.774597495527728,
+            "support": 451.0
+          },
+          "wlk": {
+            "precision": 0.9381294964028777,
+            "recall": 0.7309417040358744,
+            "f1-score": 0.8216761184625079,
+            "support": 892.0
+          },
+          "jog": {
+            "precision": 0.9973404255319149,
+            "recall": 0.9566326530612245,
+            "f1-score": 0.9765625,
+            "support": 392.0
+          },
+          "std": {
+            "precision": 0.8722707423580786,
+            "recall": 0.99875,
+            "f1-score": 0.9312354312354313,
+            "support": 800.0
+          },
+          "sit": {
+            "precision": 0.9985714285714286,
+            "recall": 0.8629629629629629,
+            "f1-score": 0.9258278145695364,
+            "support": 810.0
+          },
+          "accuracy": 0.8844504021447721,
+          "macro avg": {
+            "precision": 0.8937337331291957,
+            "recall": 0.899181716261726,
+            "f1-score": 0.8876814307499233,
+            "support": 3730.0
+          },
+          "weighted avg": {
+            "precision": 0.9051926953394848,
+            "recall": 0.8844504021447721,
+            "f1-score": 0.8860677733116357,
+            "support": 3730.0
+          }
+        }
+      },
+      "2": {
+        "seed": 2,
+        "best_epoch": "N/A",
+        "n_params": 209350,
+        "checkpoint_path": "outputs\\checkpoints\\baseline_rf_seed2.joblib",
+        "val_macro_f1": 0.9263860490701311,
+        "val_accuracy": 0.9306734578381437,
+        "test_macro_f1": 0.8844249285861813,
+        "test_accuracy": 0.8806970509383378,
+        "classification_report": {
+          "dws": {
+            "precision": 0.8935064935064935,
+            "recall": 0.8935064935064935,
+            "f1-score": 0.8935064935064935,
+            "support": 385.0
+          },
+          "ups": {
+            "precision": 0.6509863429438544,
+            "recall": 0.9512195121951219,
+            "f1-score": 0.772972972972973,
+            "support": 451.0
+          },
+          "wlk": {
+            "precision": 0.9365079365079365,
+            "recall": 0.7275784753363229,
+            "f1-score": 0.8189274447949527,
+            "support": 892.0
+          },
+          "jog": {
+            "precision": 0.9973474801061007,
+            "recall": 0.9591836734693877,
+            "f1-score": 0.9778933680104032,
+            "support": 392.0
+          },
+          "std": {
+            "precision": 0.8619201725997843,
+            "recall": 0.99875,
+            "f1-score": 0.9253039953676896,
+            "support": 800.0
+          },
+          "sit": {
+            "precision": 0.9985486211901307,
+            "recall": 0.8493827160493828,
+            "f1-score": 0.9179452968645764,
+            "support": 810.0
+          },
+          "accuracy": 0.8806970509383378,
+          "macro avg": {
+            "precision": 0.8898028411423833,
+            "recall": 0.8966034784261181,
+            "f1-score": 0.8844249285861813,
+            "support": 3730.0
+          },
+          "weighted avg": {
+            "precision": 0.9014157247930783,
+            "recall": 0.8806970509383378,
+            "f1-score": 0.8820930773679477,
+            "support": 3730.0
+          }
+        }
+      }
+    }
+  },
+  "pytorch_mlp": {
+    "model_name": "pytorch_mlp",
+    "representative_seed": {
+      "seed": 0,
+      "selection_criterion": "median validation macro-F1",
+      "val_macro_f1": 0.955549291980455,
+      "reason": "Median validation macro-F1 (0.9555) across seeds 0, 1, 2 (0.9555, 0.9533, 0.9634). Selected strictly on validation performance prior to unblinding test split."
+    },
+    "summary": {
+      "val_macro_f1_mean": 0.9574193125908462,
+      "val_macro_f1_std": 0.005286977809836103,
+      "val_accuracy_mean": 0.9654782116581777,
+      "val_accuracy_std": 0.004933671696141096,
+      "test_macro_f1_mean": 0.8849219649763359,
+      "test_macro_f1_std": 0.007831550422136187,
+      "test_accuracy_mean": 0.8881143878462913,
+      "test_accuracy_std": 0.009257420921236909,
+      "per_class_test_f1_mean": {
+        "dws": 0.9056378257452083,
+        "ups": 0.7215469318655918,
+        "wlk": 0.7818314419933722,
+        "jog": 0.939496081554768,
+        "std": 0.9759357530078644,
+        "sit": 0.98508375569121
+      },
+      "per_class_test_f1_std": {
+        "dws": 0.016541607603630847,
+        "ups": 0.029791732600391536,
+        "wlk": 0.021461274758512533,
+        "jog": 0.02130915620936155,
+        "std": 0.013712311735749242,
+        "sit": 0.012422374032749674
+      }
+    },
+    "seeds": {
+      "0": {
+        "seed": 0,
+        "best_epoch": 11,
+        "n_params": 19910,
+        "checkpoint_path": "outputs\\checkpoints\\pytorch_mlp_seed0.pt",
+        "val_macro_f1": 0.955549291980455,
+        "val_accuracy": 0.9632144878324844,
+        "test_macro_f1": 0.8818289890114395,
+        "test_accuracy": 0.8876675603217158,
+        "classification_report": {
+          "dws": {
+            "precision": 0.9123287671232877,
+            "recall": 0.8649350649350649,
+            "f1-score": 0.888,
+            "support": 385.0
+          },
+          "ups": {
+            "precision": 0.5968660968660968,
+            "recall": 0.9290465631929047,
+            "f1-score": 0.7267996530789246,
+            "support": 451.0
+          },
+          "wlk": {
+            "precision": 0.9182389937106918,
+            "recall": 0.6547085201793722,
+            "f1-score": 0.7643979057591623,
+            "support": 892.0
+          },
+          "jog": {
+            "precision": 0.9064039408866995,
+            "recall": 0.9387755102040817,
+            "f1-score": 0.9223057644110275,
+            "support": 392.0
+          },
+          "std": {
+            "precision": 0.9828009828009828,
+            "recall": 1.0,
+            "f1-score": 0.9913258983890955,
+            "support": 800.0
+          },
+          "sit": {
+            "precision": 1.0,
+            "recall": 0.9962962962962963,
+            "f1-score": 0.9981447124304267,
+            "support": 810.0
+          },
+          "accuracy": 0.8876675603217158,
+          "macro avg": {
+            "precision": 0.8861064635646264,
+            "recall": 0.89729365913462,
+            "f1-score": 0.8818289890114395,
+            "support": 3730.0
+          },
+          "weighted avg": {
+            "precision": 0.9091296242593525,
+            "recall": 0.8876675603217158,
+            "f1-score": 0.8886357562747487,
+            "support": 3730.0
+          }
+        }
+      },
+      "1": {
+        "seed": 1,
+        "best_epoch": 15,
+        "n_params": 19910,
+        "checkpoint_path": "outputs\\checkpoints\\pytorch_mlp_seed1.pt",
+        "val_macro_f1": 0.9533214905374953,
+        "val_accuracy": 0.9620826259196378,
+        "test_macro_f1": 0.8938276857160007,
+        "test_accuracy": 0.8975871313672922,
+        "classification_report": {
+          "dws": {
+            "precision": 0.9527777777777777,
+            "recall": 0.8909090909090909,
+            "f1-score": 0.9208053691275168,
+            "support": 385.0
+          },
+          "ups": {
+            "precision": 0.6472491909385113,
+            "recall": 0.8869179600886918,
+            "f1-score": 0.7483629560336763,
+            "support": 451.0
+          },
+          "wlk": {
+            "precision": 0.920749279538905,
+            "recall": 0.7163677130044843,
+            "f1-score": 0.8058007566204287,
+            "support": 892.0
+          },
+          "jog": {
+            "precision": 0.8946135831381733,
+            "recall": 0.9744897959183674,
+            "f1-score": 0.9328449328449329,
+            "support": 392.0
+          },
+          "std": {
+            "precision": 0.9445100354191264,
+            "recall": 1.0,
+            "f1-score": 0.9714632665452337,
+            "support": 800.0
+          },
+          "sit": {
+            "precision": 1.0,
+            "recall": 0.9679012345679012,
+            "f1-score": 0.9836888331242158,
+            "support": 810.0
+          },
+          "accuracy": 0.8975871313672922,
+          "macro avg": {
+            "precision": 0.8933166444687489,
+            "recall": 0.9060976324147559,
+            "f1-score": 0.8938276857160007,
+            "support": 3730.0
+          },
+          "weighted avg": {
+            "precision": 0.910545238560826,
+            "recall": 0.8975871313672922,
+            "f1-score": 0.8982385568184237,
+            "support": 3730.0
+          }
+        }
+      },
+      "2": {
+        "seed": 2,
+        "best_epoch": 17,
+        "n_params": 19910,
+        "checkpoint_path": "outputs\\checkpoints\\pytorch_mlp_seed2.pt",
+        "val_macro_f1": 0.9633871552545884,
+        "val_accuracy": 0.9711375212224108,
+        "test_macro_f1": 0.8791092202015672,
+        "test_accuracy": 0.8790884718498659,
+        "classification_report": {
+          "dws": {
+            "precision": 0.9464788732394366,
+            "recall": 0.8727272727272727,
+            "f1-score": 0.9081081081081082,
+            "support": 385.0
+          },
+          "ups": {
+            "precision": 0.5612813370473537,
+            "recall": 0.893569844789357,
+            "f1-score": 0.6894781864841745,
+            "support": 451.0
+          },
+          "wlk": {
+            "precision": 0.9365079365079365,
+            "recall": 0.6614349775784754,
+            "f1-score": 0.7752956636005256,
+            "support": 892.0
+          },
+          "jog": {
+            "precision": 0.9548872180451128,
+            "recall": 0.9719387755102041,
+            "f1-score": 0.9633375474083439,
+            "support": 392.0
+          },
+          "std": {
+            "precision": 0.9324009324009324,
+            "recall": 1.0,
+            "f1-score": 0.9650180940892642,
+            "support": 800.0
+          },
+          "sit": {
+            "precision": 0.9987012987012988,
+            "recall": 0.9493827160493827,
+            "f1-score": 0.9734177215189873,
+            "support": 810.0
+          },
+          "accuracy": 0.8790884718498659,
+          "macro avg": {
+            "precision": 0.888376265990345,
+            "recall": 0.8915089311091152,
+            "f1-score": 0.8791092202015672,
+            "support": 3730.0
+          },
+          "weighted avg": {
+            "precision": 0.9067243742394373,
+            "recall": 0.8790884718498659,
+            "f1-score": 0.8821048696899505,
+            "support": 3730.0
+          }
+        }
+      }
+    }
+  },
+  "pytorch_cnn_1d": {
+    "model_name": "pytorch_cnn_1d",
+    "representative_seed": {
+      "seed": 2,
+      "selection_criterion": "median validation macro-F1",
+      "val_macro_f1": 0.9458387987140872,
+      "reason": "Median validation macro-F1 (0.9458) across seeds 0, 1, 2 (0.9673, 0.9444, 0.9458). Selected strictly on validation performance prior to unblinding test split."
+    },
+    "summary": {
+      "val_macro_f1_mean": 0.9525141772592245,
+      "val_macro_f1_std": 0.012823483680695474,
+      "val_accuracy_mean": 0.9633088096585549,
+      "val_accuracy_std": 0.008280467931970792,
+      "test_macro_f1_mean": 0.8614636132698998,
+      "test_macro_f1_std": 0.02928450565802943,
+      "test_accuracy_mean": 0.8651474530831099,
+      "test_accuracy_std": 0.03204510438101071,
+      "per_class_test_f1_mean": {
+        "dws": 0.8011205735607922,
+        "ups": 0.7187559749897265,
+        "wlk": 0.7714784289160276,
+        "jog": 0.9780900774071378,
+        "std": 0.9445552453131233,
+        "sit": 0.9547813794325908
+      },
+      "per_class_test_f1_std": {
+        "dws": 0.012401381347347536,
+        "ups": 0.07929467308655605,
+        "wlk": 0.06728424117914912,
+        "jog": 0.0068608076084575535,
+        "std": 0.048606147500932013,
+        "sit": 0.04245151763425974
+      }
+    },
+    "seeds": {
+      "0": {
+        "seed": 0,
+        "best_epoch": 18,
+        "n_params": 128454,
+        "checkpoint_path": "outputs\\checkpoints\\pytorch_cnn_1d_seed0.pt",
+        "val_macro_f1": 0.9672983168404435,
+        "val_accuracy": 0.9728353140916808,
+        "test_macro_f1": 0.842292145997482,
+        "test_accuracy": 0.8428954423592493,
+        "classification_report": {
+          "dws": {
+            "precision": 0.7540229885057471,
+            "recall": 0.8519480519480519,
+            "f1-score": 0.8,
+            "support": 385.0
+          },
+          "ups": {
+            "precision": 0.6331058020477816,
+            "recall": 0.8226164079822617,
+            "f1-score": 0.7155255544840887,
+            "support": 451.0
+          },
+          "wlk": {
+            "precision": 0.9155145929339478,
+            "recall": 0.6681614349775785,
+            "f1-score": 0.7725210628645496,
+            "support": 892.0
+          },
+          "jog": {
+            "precision": 0.9868073878627969,
+            "recall": 0.9540816326530612,
+            "f1-score": 0.9701686121919585,
+            "support": 392.0
+          },
+          "std": {
+            "precision": 0.8,
+            "recall": 1.0,
+            "f1-score": 0.8888888888888888,
+            "support": 800.0
+          },
+          "sit": {
+            "precision": 0.9941089837997055,
+            "recall": 0.8333333333333334,
+            "f1-score": 0.9066487575554063,
+            "support": 810.0
+          },
+          "accuracy": 0.8428954423592493,
+          "macro avg": {
+            "precision": 0.8472599591916631,
+            "recall": 0.8550234768157144,
+            "f1-score": 0.842292145997482,
+            "support": 3730.0
+          },
+          "weighted avg": {
+            "precision": 0.8644840099504882,
+            "recall": 0.8428954423592493,
+            "f1-score": 0.8433226578707078,
+            "support": 3730.0
+          }
+        }
+      },
+      "1": {
+        "seed": 1,
+        "best_epoch": 3,
+        "n_params": 128454,
+        "checkpoint_path": "outputs\\checkpoints\\pytorch_cnn_1d_seed1.pt",
+        "val_macro_f1": 0.9444054162231427,
+        "val_accuracy": 0.9592529711375212,
+        "test_macro_f1": 0.895172435506081,
+        "test_accuracy": 0.9018766756032172,
+        "classification_report": {
+          "dws": {
+            "precision": 0.8151041666666666,
+            "recall": 0.812987012987013,
+            "f1-score": 0.8140442132639792,
+            "support": 385.0
+          },
+          "ups": {
+            "precision": 0.7043918918918919,
+            "recall": 0.9246119733924612,
+            "f1-score": 0.7996164908916586,
+            "support": 451.0
+          },
+          "wlk": {
+            "precision": 0.9243243243243243,
+            "recall": 0.7668161434977578,
+            "f1-score": 0.8382352941176471,
+            "support": 892.0
+          },
+          "jog": {
+            "precision": 0.9821428571428571,
+            "recall": 0.9821428571428571,
+            "f1-score": 0.9821428571428571,
+            "support": 392.0
+          },
+          "std": {
+            "precision": 0.9345794392523364,
+            "recall": 1.0,
+            "f1-score": 0.966183574879227,
+            "support": 800.0
+          },
+          "sit": {
+            "precision": 0.9986945169712794,
+            "recall": 0.9444444444444444,
+            "f1-score": 0.9708121827411168,
+            "support": 810.0
+          },
+          "accuracy": 0.9018766756032172,
+          "macro avg": {
+            "precision": 0.8932061993748927,
+            "recall": 0.9051670719107557,
+            "f1-score": 0.895172435506081,
+            "support": 3730.0
+          },
+          "weighted avg": {
+            "precision": 0.9108845187281,
+            "recall": 0.9018766756032172,
+            "f1-score": 0.9024248444438062,
+            "support": 3730.0
+          }
+        }
+      },
+      "2": {
+        "seed": 2,
+        "best_epoch": 4,
+        "n_params": 128454,
+        "checkpoint_path": "outputs\\checkpoints\\pytorch_cnn_1d_seed2.pt",
+        "val_macro_f1": 0.9458387987140872,
+        "val_accuracy": 0.9578381437464629,
+        "test_macro_f1": 0.8469262583061362,
+        "test_accuracy": 0.8506702412868633,
+        "classification_report": {
+          "dws": {
+            "precision": 0.9204152249134948,
+            "recall": 0.6909090909090909,
+            "f1-score": 0.7893175074183977,
+            "support": 385.0
+          },
+          "ups": {
+            "precision": 0.49516908212560384,
+            "recall": 0.9090909090909091,
+            "f1-score": 0.6411258795934324,
+            "support": 451.0
+          },
+          "wlk": {
+            "precision": 0.8723051409618574,
+            "recall": 0.5896860986547086,
+            "f1-score": 0.7036789297658863,
+            "support": 892.0
+          },
+          "jog": {
+            "precision": 0.9921875,
+            "recall": 0.9719387755102041,
+            "f1-score": 0.9819587628865979,
+            "support": 392.0
+          },
+          "std": {
+            "precision": 0.9580838323353293,
+            "recall": 1.0,
+            "f1-score": 0.9785932721712538,
+            "support": 800.0
+          },
+          "sit": {
+            "precision": 0.9987357774968394,
+            "recall": 0.9753086419753086,
+            "f1-score": 0.9868831980012492,
+            "support": 810.0
+          },
+          "accuracy": 0.8506702412868633,
+          "macro avg": {
+            "precision": 0.8728160929721874,
+            "recall": 0.8561555860233702,
+            "f1-score": 0.8469262583061362,
+            "support": 3730.0
+          },
+          "weighted avg": {
+            "precision": 0.8901227477235988,
+            "recall": 0.8506702412868633,
+            "f1-score": 0.8546633942556174,
+            "support": 3730.0
+          }
+        }
+      }
+    }
+  }
+}

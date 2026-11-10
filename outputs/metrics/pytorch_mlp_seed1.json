@@ -1,0 +1,24 @@
+{
+  "model_name": "pytorch_mlp",
+  "seed": 1,
+  "total_trainable_parameters": 19910,
+  "best_epoch": 15,
+  "best_val_macro_f1": 0.9533214905374953,
+  "val_loss_at_best": 0.10681279033229052,
+  "val_accuracy_at_best": 0.9620826259196378,
+  "total_epochs_trained": 23,
+  "total_duration_seconds": 15.425898499999676,
+  "hyperparameters": {
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "use_class_weights": false,
+    "dropout": 0.2,
+    "hidden_sizes": [
+      128,
+      64
+    ],
+    "filters": null,
+    "kernel_size": null
+  }
+}

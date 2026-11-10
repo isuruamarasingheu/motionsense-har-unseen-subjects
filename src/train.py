@@ -491,28 +491,29 @@ def train_pytorch_model(
             },
         )
 
-        # Save loss curves
-        # User requirement: fig08_mlp_loss_curves.png, fig09_cnn_loss_curves.png
-        fig_name = "fig09_cnn_loss_curves.png" if is_cnn else "fig08_mlp_loss_curves.png"
-        fig_path = fig_dir / fig_name
-        plot_loss_curves(
-            history=history,
-            best_epoch=best_epoch,
-            best_macro_f1=best_val_macro_f1,
-            model_name=model_name,
-            output_path=fig_path,
-        )
+        # Save loss curves (seed 0 only to avoid overwriting fig08/fig09; skip for ablation runs)
+        if seed == 0 and "nodrop" not in model_name.lower():
+            fig_name = "fig09_cnn_loss_curves.png" if is_cnn else "fig08_mlp_loss_curves.png"
+            fig_path = fig_dir / fig_name
+            plot_loss_curves(
+                history=history,
+                best_epoch=best_epoch,
+                best_macro_f1=best_val_macro_f1,
+                model_name=model_name,
+                output_path=fig_path,
+            )
 
         # Save layer table markdown
-        if is_cnn:
-            layer_table_md = generate_layer_table_cnn(model)
-            table_path = metrics_dir / "cnn_layers.md"
-        else:
-            layer_table_md = generate_layer_table_mlp(model)
-            table_path = metrics_dir / "mlp_layers.md"
-        with open(table_path, "w", encoding="utf-8") as f:
-            f.write(layer_table_md)
-        logger.info(f"Saved layer table to {table_path}")
+        if seed == 0 and "nodrop" not in model_name.lower():
+            if is_cnn:
+                layer_table_md = generate_layer_table_cnn(model)
+                table_path = metrics_dir / "cnn_layers.md"
+            else:
+                layer_table_md = generate_layer_table_mlp(model)
+                table_path = metrics_dir / "mlp_layers.md"
+            with open(table_path, "w", encoding="utf-8") as f:
+                f.write(layer_table_md)
+            logger.info(f"Saved layer table to {table_path}")
 
     return results
 

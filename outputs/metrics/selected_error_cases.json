@@ -1,0 +1,74 @@
+[
+  {
+    "case_id": 1,
+    "description": "wlk -> ups (high confidence, unanimous)",
+    "subject": 1,
+    "trial": 7,
+    "start_index": 2176,
+    "true": "wlk",
+    "pred": "ups",
+    "model": "CNN s2",
+    "confidence": 0.9935861,
+    "rule": "Highest CNN confidence among unanimous wlk->ups misclassifications"
+  },
+  {
+    "case_id": 2,
+    "description": "wlk -> ups (low confidence, boundary case)",
+    "subject": 1,
+    "trial": 7,
+    "start_index": 5056,
+    "true": "wlk",
+    "pred": "ups",
+    "model": "CNN s2",
+    "confidence": 0.36074355,
+    "rule": "Lowest CNN confidence (>0.35 threshold) for wlk->ups misclassifications"
+  },
+  {
+    "case_id": 3,
+    "description": "sit -> std (high confidence, static posture)",
+    "subject": 18,
+    "trial": 5,
+    "start_index": 7808,
+    "true": "sit",
+    "pred": "std",
+    "model": "RF s1",
+    "confidence": 0.8733333333333333,
+    "rule": "Highest confidence among static postural sit->std misclassifications"
+  },
+  {
+    "case_id": 4,
+    "description": "dws -> ups (high confidence, stair direction)",
+    "subject": 21,
+    "trial": 2,
+    "start_index": 1856,
+    "true": "dws",
+    "pred": "ups",
+    "model": "CNN s2",
+    "confidence": 0.95170265,
+    "rule": "Highest confidence among stair direction inversion dws->ups misclassifications"
+  },
+  {
+    "case_id": 5,
+    "description": "wlk -> jog (high confidence, cadence mismatch)",
+    "subject": 1,
+    "trial": 7,
+    "start_index": 3648,
+    "true": "wlk",
+    "pred": "jog",
+    "model": "MLP s0",
+    "confidence": 0.97785884,
+    "rule": "Highest confidence among walking vs jogging cadence mismatch wlk->jog"
+  },
+  {
+    "case_id": 6,
+    "description": "dws -> wlk (high confidence, descending stair vs flat)",
+    "subject": 18,
+    "trial": 2,
+    "start_index": 0,
+    "true": "dws",
+    "pred": "wlk",
+    "model": "CNN s2",
+    "confidence": 0.98015195,
+    "rule": "Highest confidence among descending stair vs level walking dws->wlk"
+  }
+]

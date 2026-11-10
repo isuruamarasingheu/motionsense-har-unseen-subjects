@@ -1,0 +1,235 @@
+{
+  "observational_caveat": "There are exactly 2 subjects per gender in the test partition (male: subjects 1, 21; female: subjects 8, 18). Consequently, demographic gender comparisons are indicative only and cannot fully disentangle gender from individual kinematic and anthropometric variations.",
+  "subjects": {
+    "1": {
+      "demographics": {
+        "subject": 1,
+        "gender": "male",
+        "age": 46,
+        "height": 188.0,
+        "weight": 102.0
+      },
+      "window_count": 791,
+      "models": {
+        "baseline_rf": {
+          "macro_f1_mean": 0.9190695612329286,
+          "macro_f1_std": 0.004118403820303897,
+          "scores_per_seed": [
+            0.9168794481019101,
+            0.9238202714174367,
+            0.9165089641794392
+          ]
+        },
+        "pytorch_mlp": {
+          "macro_f1_mean": 0.8033638686520347,
+          "macro_f1_std": 0.03282383431584922,
+          "scores_per_seed": [
+            0.7655066412522512,
+            0.823882089031307,
+            0.820702875672546
+          ]
+        },
+        "pytorch_cnn_1d": {
+          "macro_f1_mean": 0.887518488018903,
+          "macro_f1_std": 0.029347807712802675,
+          "scores_per_seed": [
+            0.8844523083460839,
+            0.9182790088783793,
+            0.8598241468322455
+          ]
+        }
+      }
+    },
+    "8": {
+      "demographics": {
+        "subject": 8,
+        "gender": "female",
+        "age": 24,
+        "height": 161.0,
+        "weight": 52.0
+      },
+      "window_count": 926,
+      "models": {
+        "baseline_rf": {
+          "macro_f1_mean": 0.9483634729782732,
+          "macro_f1_std": 0.006051350706868649,
+          "scores_per_seed": [
+            0.95464904631805,
+            0.9478640782997916,
+            0.9425772943169778
+          ]
+        },
+        "pytorch_mlp": {
+          "macro_f1_mean": 0.9342701804074943,
+          "macro_f1_std": 0.016617331523139402,
+          "scores_per_seed": [
+            0.9523720505021686,
+            0.9307308178450814,
+            0.9197076728752328
+          ]
+        },
+        "pytorch_cnn_1d": {
+          "macro_f1_mean": 0.9214406120885741,
+          "macro_f1_std": 0.03949276094684179,
+          "scores_per_seed": [
+            0.8765320059500121,
+            0.9507572025478606,
+            0.9370326277678496
+          ]
+        }
+      }
+    },
+    "18": {
+      "demographics": {
+        "subject": 18,
+        "gender": "female",
+        "age": 26,
+        "height": 164.0,
+        "weight": 54.0
+      },
+      "window_count": 959,
+      "models": {
+        "baseline_rf": {
+          "macro_f1_mean": 0.8244245347142624,
+          "macro_f1_std": 0.007175269530384358,
+          "scores_per_seed": [
+            0.8187317776215176,
+            0.8324842500372026,
+            0.8220575764840667
+          ]
+        },
+        "pytorch_mlp": {
+          "macro_f1_mean": 0.951551348130359,
+          "macro_f1_std": 0.014401943033428346,
+          "scores_per_seed": [
+            0.9667137081060769,
+            0.9498856641583197,
+            0.9380546721266806
+          ]
+        },
+        "pytorch_cnn_1d": {
+          "macro_f1_mean": 0.8318552462640244,
+          "macro_f1_std": 0.04308909396791025,
+          "scores_per_seed": [
+            0.7821326387144193,
+            0.8551619623679764,
+            0.8582711377096777
+          ]
+        }
+      }
+    },
+    "21": {
+      "demographics": {
+        "subject": 21,
+        "gender": "male",
+        "age": 24,
+        "height": 165.0,
+        "weight": 52.0
+      },
+      "window_count": 1054,
+      "models": {
+        "baseline_rf": {
+          "macro_f1_mean": 0.8571465014365619,
+          "macro_f1_std": 0.0030378348995241103,
+          "scores_per_seed": [
+            0.8566036723205227,
+            0.8544166757026602,
+            0.8604191562865028
+          ]
+        },
+        "pytorch_mlp": {
+          "macro_f1_mean": 0.8332919261317481,
+          "macro_f1_std": 0.021811782202447134,
+          "scores_per_seed": [
+            0.8223304362823144,
+            0.8584103427121771,
+            0.8191349994007527
+          ]
+        },
+        "pytorch_cnn_1d": {
+          "macro_f1_mean": 0.8060670820333238,
+          "macro_f1_std": 0.06904364587742692,
+          "scores_per_seed": [
+            0.8146332778270167,
+            0.8704279223485702,
+            0.7331400459243845
+          ]
+        }
+      }
+    }
+  },
+  "gender_groups": {
+    "male": {
+      "subjects": [
+        1,
+        21
+      ],
+      "total_windows": 1845,
+      "models": {
+        "baseline_rf": {
+          "macro_f1_mean": 0.8822773668249839,
+          "macro_f1_std": 0.0010935188641775545,
+          "scores_per_seed": [
+            0.881047556777183,
+            0.8826443627101694,
+            0.883140180987599
+          ]
+        },
+        "pytorch_mlp": {
+          "macro_f1_mean": 0.8193272258480709,
+          "macro_f1_std": 0.02212257335579442,
+          "scores_per_seed": [
+            0.7967928999918676,
+            0.8410136675677848,
+            0.8201751099845606
+          ]
+        },
+        "pytorch_cnn_1d": {
+          "macro_f1_mean": 0.8406621152643043,
+          "macro_f1_std": 0.05002144725912248,
+          "scores_per_seed": [
+            0.8427596488710041,
+            0.8896018016323995,
+            0.7896248952895096
+          ]
+        }
+      }
+    },
+    "female": {
+      "subjects": [
+        8,
+        18
+      ],
+      "total_windows": 1885,
+      "models": {
+        "baseline_rf": {
+          "macro_f1_mean": 0.8910225023535879,
+          "macro_f1_std": 0.00328639847242307,
+          "scores_per_seed": [
+            0.8916370868029438,
+            0.8939582225225807,
+            0.8874721977352392
+          ]
+        },
+        "pytorch_mlp": {
+          "macro_f1_mean": 0.9456401604418273,
+          "macro_f1_std": 0.013796317804213655,
+          "scores_per_seed": [
+            0.9603888867392761,
+            0.9434806500625553,
+            0.9330509445236502
+          ]
+        },
+        "pytorch_cnn_1d": {
+          "macro_f1_mean": 0.8805427454484546,
+          "macro_f1_std": 0.03155703623603178,
+          "scores_per_seed": [
+            0.84418739897212,
+            0.900856565437544,
+            0.8965842719356997
+          ]
+        }
+      }
+    }
+  }
+}

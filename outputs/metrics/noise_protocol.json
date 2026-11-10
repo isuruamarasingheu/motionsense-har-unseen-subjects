@@ -1,0 +1,33 @@
+{
+  "hypothesis": "CNN on raw signals degrades faster under additive sensor noise than RF/MLP on window statistics",
+  "noise_model": "Additive Gaussian noise N(0, (sigma * train_std_c)^2) injected per channel c into raw unscaled test windows",
+  "channel_scaling": "train_std_c derived from saved outputs/preprocessing/raw_scaler.json (strictly training distribution)",
+  "sigma_levels": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "noise_repeats_per_sigma": 5,
+  "noise_random_seeds": [
+    100,
+    101,
+    102,
+    103,
+    104
+  ],
+  "models_evaluated": [
+    "baseline_rf (seeds 0, 1, 2)",
+    "pytorch_mlp (seeds 0, 1, 2)",
+    "pytorch_cnn_1d (seeds 0, 1, 2)"
+  ],
+  "total_model_evaluations": 225,
+  "test_sample_size": 3730,
+  "primary_metric": "macro-averaged F1 score",
+  "feature_pipeline_under_noise": {
+    "RF_and_MLP": "Noise added to raw windows -> 84 features recomputed via extract_features -> standardized via saved feature_scaler.joblib",
+    "CNN": "Noise added to raw windows -> standardized via saved raw_scaler.joblib -> transposed to (N, 12, 128)"
+  },
+  "exact_baseline_reproduction_assertion": "sigma=0.0 must exactly match results_table.csv within 1e-6 tolerance"
+}

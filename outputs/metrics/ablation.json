@@ -1,0 +1,71 @@
+{
+  "design_claim": "Dropout (p=0.3) before the classifier improves validation macro-F1 and reduces seed-to-seed variance of the 1D-CNN.",
+  "configuration_difference": {
+    "key": "model.dropout",
+    "baseline_value": 0.3,
+    "ablation_value": 0.0,
+    "exact_one_key_difference_asserted": true
+  },
+  "baseline_dropout_0_3": {
+    "mean_val_macro_f1": 0.9525141772592245,
+    "std_val_macro_f1": 0.012823483680695474,
+    "runs": [
+      {
+        "seed": 0,
+        "best_epoch": 18,
+        "epochs_completed": 26,
+        "val_macro_f1": 0.9672983168404435,
+        "val_accuracy": 0.9728353140916808
+      },
+      {
+        "seed": 1,
+        "best_epoch": 3,
+        "epochs_completed": 11,
+        "val_macro_f1": 0.9444054162231427,
+        "val_accuracy": 0.9592529711375212
+      },
+      {
+        "seed": 2,
+        "best_epoch": 4,
+        "epochs_completed": 12,
+        "val_macro_f1": 0.9458387987140872,
+        "val_accuracy": 0.9578381437464629
+      }
+    ]
+  },
+  "ablation_dropout_0_0": {
+    "mean_val_macro_f1": 0.9512991296464625,
+    "std_val_macro_f1": 0.021460821313625048,
+    "runs": [
+      {
+        "seed": 0,
+        "best_epoch": 1,
+        "epochs_completed": 9,
+        "val_macro_f1": 0.926562955201541,
+        "val_accuracy": 0.9402942840973402
+      },
+      {
+        "seed": 1,
+        "best_epoch": 7,
+        "epochs_completed": 15,
+        "val_macro_f1": 0.9623795418990042,
+        "val_accuracy": 0.9714204867006225
+      },
+      {
+        "seed": 2,
+        "best_epoch": 5,
+        "epochs_completed": 13,
+        "val_macro_f1": 0.964954891838842,
+        "val_accuracy": 0.9711375212224108
+      }
+    ]
+  },
+  "difference_in_means": 0.0012150476127620324,
+  "variance_ratio_nodrop_over_drop": 2.800790535754119,
+  "remaining_confounders": [
+    "early-stopping epoch differs per run",
+    "BatchNorm still regularises",
+    "only 4 validation subjects",
+    "3 seeds only"
+  ]
+}
