@@ -3,7 +3,8 @@ Module: src.models.mlp
 Purpose: T3b PyTorch Multi-Layer Perceptron for hand-crafted feature vectors.
 
 Architecture:
-- Input dimension: 84 tabular summary features extracted from 12 sensor channels.
+- Input dimension: 84 tabular summary features (mean, std, min, max, median, IQR
+  over 14 signals: 12 motion channels + |userAcc| + |rotRate|; no skewness).
 - Hidden blocks:
     * Linear(84 -> h1) -> BatchNorm1d(h1) -> ReLU -> Dropout(p)
     * Linear(h1 -> h2) -> BatchNorm1d(h2) -> ReLU -> Dropout(p)
@@ -33,9 +34,8 @@ class PyTorchMLP(nn.Module):
 
     Why:
         Processes 84 hand-crafted statistical features (mean, std, min, max,
-        median, IQR, skewness across 12 motion channels) for human activity recognition.
-        Batch Normalisation stabilises covariate shift across subjects, while
-        Dropout prevents overfitting on smaller activity classes.
+        median, IQR over 14 signals: 12 channels + |userAcc| + |rotRate|; no skewness)
+        for human activity recognition. Dropout prevents overfitting on smaller activity classes.
     """
 
     def __init__(

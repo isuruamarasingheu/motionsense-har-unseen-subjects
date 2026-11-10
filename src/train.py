@@ -39,6 +39,7 @@ from pathlib import Path
 from typing import Any
 
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
 import numpy as np
 import pandas as pd
 import torch
@@ -163,38 +164,67 @@ def plot_loss_curves(
     output_path: Path,
 ) -> None:
     """
-    Generate and save training and validation loss curves with marked best epoch.
+    Generate and save training and validation loss curves alongside validation macro-F1
+    on a secondary y-axis, with marked best epoch and integer epoch ticks.
 
     Why:
         Plan Section 3b & Rule 12: visual diagnosis of learning convergence,
-        overfitting inflection points, and verification of early stopping selection.
+        overfitting inflection points, and tracking selection noise on validation macro-F1.
     """
-    epochs = [h["epoch"] for h in history]
-    train_losses = [h["train_loss"] for h in history]
-    val_losses = [h["val_loss"] for h in history]
+    epochs = [int(h["epoch"]) for h in history]
+    train_losses = [float(h["train_loss"]) for h in history]
+    val_losses = [float(h["val_loss"]) for h in history]
+    val_f1s = [float(h["val_macro_f1"]) for h in history]
 
-    fig, ax = plt.subplots(figsize=(8, 5), dpi=150)
-    ax.plot(epochs, train_losses, label="Training Loss", color="#1f77b4", lw=2)
-    ax.plot(epochs, val_losses, label="Validation Loss", color="#ff7f0e", lw=2)
+    fig, ax1 = plt.subplots(figsize=(8.5, 5), dpi=150)
+
+    # Primary axis: Loss
+    line1 = ax1.plot(epochs, train_losses, label="Train Loss", color="#1f77b4", lw=2)
+    line2 = ax1.plot(epochs, val_losses, label="Val Loss", color="#ff7f0e", lw=2)
+    ax1.set_xlabel("Epoch", fontsize=11, fontweight="medium")
+    ax1.set_ylabel("Cross-Entropy Loss (nats)", fontsize=11, color="#333333", fontweight="medium")
+    ax1.tick_params(axis="y", labelcolor="#333333")
+    ax1.xaxis.set_major_locator(MaxNLocator(integer=True))
+    ax1.grid(True, linestyle=":", alpha=0.5)
+
+    # Secondary axis: Validation Macro-F1
+    ax2 = ax1.twinx()
+    line3 = ax2.plot(
+        epochs,
+        val_f1s,
+        label="Val Macro-F1",
+        color="#2ca02c",
+        linestyle="-.",
+        lw=1.8,
+        marker="o",
+        markersize=4,
+    )
+    ax2.set_ylabel("Validation Macro-F1", fontsize=11, color="#2ca02c", fontweight="medium")
+    ax2.tick_params(axis="y", labelcolor="#2ca02c")
 
     # Mark the selected best checkpoint epoch
-    ax.axvline(
+    line_best = ax1.axvline(
         x=best_epoch,
-        color="#2ca02c",
+        color="#d62728",
         linestyle="--",
         lw=1.5,
-        label=f"Selected Best Epoch ({best_epoch}) - Val F1: {best_macro_f1:.4f}",
+        label=f"Best Model (Epoch {best_epoch}, Val F1={best_macro_f1:.4f})",
     )
     if 1 <= best_epoch <= len(epochs):
-        best_val_loss = val_losses[best_epoch - 1]
-        ax.plot(best_epoch, best_val_loss, "o", color="#2ca02c", markersize=8)
+        best_f1_val = val_f1s[best_epoch - 1]
+        ax2.plot(best_epoch, best_f1_val, "*", color="#d62728", markersize=12, zorder=5)
+
+    # Combine legends from both axes
+    lines = line1 + line2 + line3 + [line_best]
+    labels = [l.get_label() for l in lines]
+    ax1.legend(lines, labels, loc="upper right", frameon=True, facecolor="white", framealpha=0.9, fontsize=9)
 
     model_display = "PyTorch 1D-CNN" if "cnn" in model_name.lower() else "PyTorch MLP"
-    ax.set_title(f"{model_display}: Loss vs Training Epoch", fontsize=13, fontweight="bold")
-    ax.set_xlabel("Epoch", fontsize=11)
-    ax.set_ylabel("Cross-Entropy Loss (nats)", fontsize=11)
-    ax.grid(True, linestyle=":", alpha=0.6)
-    ax.legend(frameon=True, fontsize=10, loc="upper right")
+    ax1.set_title(
+        f"{model_display}: Loss & Validation Macro-F1 vs Training Epoch",
+        fontsize=12,
+        fontweight="bold",
+    )
     plt.tight_layout()
 
     output_path.parent.mkdir(parents=True, exist_ok=True)

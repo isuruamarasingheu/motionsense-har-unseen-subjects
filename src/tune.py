@@ -225,6 +225,17 @@ def run_tuning(budget_path: str = "configs/tuning_budget.yaml") -> dict[str, Any
     )
     logger.info("=" * 60 + "\n")
 
+    # Generate configs/baseline_rf_final.yaml
+    rf_best_params = json.loads(best_rf_record["hyperparameters"])
+    rf_final_cfg = copy.deepcopy(base_rf_cfg)
+    rf_final_cfg["model"]["n_estimators"] = rf_best_params["n_estimators"]
+    rf_final_cfg["model"]["max_depth"] = rf_best_params["max_depth"]
+    rf_final_cfg["model"]["class_weight"] = rf_best_params["class_weight"]
+    rf_final_path = configs_dir / "baseline_rf_final.yaml"
+    with open(rf_final_path, "w", encoding="utf-8") as f:
+        yaml.dump(rf_final_cfg, f, default_flow_style=False)
+    logger.info(f"Generated finalised config: {rf_final_path}")
+
     # Generate configs/mlp_final.yaml
     mlp_best_params = json.loads(best_mlp_record["hyperparameters"])
     mlp_final_cfg = copy.deepcopy(base_mlp_cfg)
@@ -258,6 +269,7 @@ def run_tuning(budget_path: str = "configs/tuning_budget.yaml") -> dict[str, Any
                 "val_macro_f1": best_rf_record["val_macro_f1"],
                 "val_accuracy": best_rf_record["val_accuracy"],
                 "hyperparameters": json.loads(best_rf_record["hyperparameters"]),
+                "final_config_path": str(rf_final_path),
             },
             "mlp": {
                 "trial_id": best_mlp_record["trial_id"],

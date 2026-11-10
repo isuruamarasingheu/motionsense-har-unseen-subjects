@@ -1,0 +1,13 @@
+# Final frozen configuration for Random Forest baseline model (Task T3a, trial rf_04)
+model:
+  name: "baseline_rf"
+  n_estimators: 300
+  max_depth: null
+  class_weight: "balanced"
+  n_jobs: -1
+
+data:
+  feature_dim: 84
+  scaler: "StandardScaler"
+
+seeds: [0, 1, 2]
