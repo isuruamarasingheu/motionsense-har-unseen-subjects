@@ -1,4 +1,4 @@
-# Human Activity Recognition with MotionSense
+# Human Activity Recognition on Unseen People (MotionSense)
 
 **Module:** Artificial Neural Networks  
 **Task:** Classify phone sensor data into 6 activities (`dws`: downstairs, `ups`: upstairs, `wlk`: walking, `jog`: jogging, `sit`: sitting, `std`: standing)  
